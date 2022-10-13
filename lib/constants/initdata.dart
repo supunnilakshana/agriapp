@@ -12,7 +12,7 @@ const int resfail = 0;
 const String sucesscode = "sucessfull";
 
 class CollectionPath {
-  static const bakeryitempath = "products/data/bakeryItem";
+  static const userpath = "users/";
   static const reorderdocmpath = "reorder";
   static const trashpath = "trash";
   static const invoicehpath = "invoice";

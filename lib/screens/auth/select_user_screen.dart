@@ -45,7 +45,6 @@ class SelectUserScreen extends StatelessWidget {
                       size: size,
                     ),
                     onTap: () {
-                      print("dog");
                       Navigator.push(
                         context,
                         MaterialPageRoute(

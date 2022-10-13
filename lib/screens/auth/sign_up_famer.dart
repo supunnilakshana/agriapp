@@ -1,14 +1,23 @@
+import 'dart:typed_data';
+
 import 'package:agriapp/components/already_have_an_account_acheck.dart';
 import 'package:agriapp/components/or_divider.dart';
 import 'package:agriapp/constants/constraints.dart';
+import 'package:agriapp/constants/initdata.dart';
+import 'package:agriapp/models/usermodel.dart';
 import 'package:agriapp/screens/auth/auth_checking.dart';
 import 'package:agriapp/screens/auth/sign_in.dart';
 import 'package:agriapp/services/auth/signin_mannager.dart';
+import 'package:agriapp/services/date_time/date.dart';
+import 'package:agriapp/services/firebase/fb_handeler.dart';
+import 'package:agriapp/services/upload/file_upload.dart';
 
 import 'package:agriapp/services/validator/validate_handeler.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 
 class SignUpFamer extends StatefulWidget {
@@ -31,6 +40,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
   final TextEditingController _namecon = TextEditingController();
   final TextEditingController _mobilecon = TextEditingController();
   final TextEditingController _citycon = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +125,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                       child: RawMaterialButton(
                                         onPressed: () async {
                                           FocusScope.of(context).unfocus();
-                                          // _showPicker(context);
+                                          _imgFromGallery();
                                         },
                                         elevation: 2.0,
                                         fillColor: Color(0xFFF5F6F9),
@@ -259,27 +269,55 @@ class _SignUpFamerState extends State<SignUpFamer> {
                               onTap: () async {
                                 if (_formKey.currentState!.validate()) {
                                   print("press login");
+                                  _scaffoldKey.currentState!
+
+                                      // ignore: deprecated_member_use
+                                      .showSnackBar(SnackBar(
+                                    duration: const Duration(seconds: 4),
+                                    backgroundColor: kPrimaryColordark,
+                                    content: Row(
+                                      children: const <Widget>[
+                                        CircularProgressIndicator(),
+                                        Text("Registering...")
+                                      ],
+                                    ),
+                                  ));
                                   print(_email.trim());
                                   print(_passWord);
+
                                   int r = await SigninManager()
-                                      .signIn(_email.trim(), _passWord);
-                                  print(r.toString() +
-                                      "------------------------------------------");
+                                      .signUp(_email.trim(), _passWord);
+
                                   if (r == 0) {
-                                    print("loged");
+                                    String iurl = await _imageUpload();
+                                    final user =
+                                        FirebaseAuth.instance.currentUser;
+                                    final umodel = UserModel(
+                                        uid: user!.uid,
+                                        name: _namecon.text,
+                                        email: _uncon.text,
+                                        phone: _mobilecon.text,
+                                        area: _citycon.text,
+                                        imageurl: iurl,
+                                        role: UserRole.farmer.index.toString(),
+                                        date: DateTime.now().toIso8601String());
+                                    await FbHandeler.createDocManual(
+                                        umodel.toMap(),
+                                        CollectionPath.userpath,
+                                        user.uid);
                                     // ignore: use_build_context_synchronously
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return AuthCheckScreen();
+                                          return const AuthCheckScreen();
                                         },
                                       ),
                                     );
                                   } else if (r == 1) {
                                     Get.snackbar(
                                       "SignUp failed",
-                                      "Please enter the correct email or password",
+                                      "Please enter the valid email or password",
                                       icon: const Icon(Icons.error,
                                           color: Colors.white),
                                       snackPosition: SnackPosition.BOTTOM,
@@ -287,7 +325,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                   } else if (r == 2) {
                                     Get.snackbar(
                                       "SignUp failed",
-                                      "Please enter the correct email or password",
+                                      "Please enter the valid email or password",
                                       colorText: Colors.red,
                                       backgroundColor: Colors.yellow,
                                       icon: const Icon(Icons.error,
@@ -308,7 +346,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                     color: kPrimaryColordark),
                                 child: const Center(
                                   child: Text(
-                                    "Sign In",
+                                    "Sign Up",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
@@ -345,5 +383,38 @@ class _SignUpFamerState extends State<SignUpFamer> {
         ),
       ),
     );
+  }
+
+  final ImagePicker _picker = ImagePicker();
+  XFile? _image;
+  bool isimgload = false;
+
+  Future<void> _imgFromGallery() async {
+    XFile? image =
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+
+    if (image != null) {
+      setState(() {
+        _image = image;
+
+        isimgload = true;
+      });
+    }
+  }
+
+  Future<String> _imageUpload() async {
+    String imgurl = guserimg;
+    print(isimgload);
+    if (isimgload) {
+      Uint8List imgunitfile = await _image!.readAsBytes();
+      String imgid = Date.getDateTimeId();
+
+      imgurl =
+          await FileUploader.uploadImage(imgunitfile, userimagebucket, imgid);
+    } else {
+      imgurl = guserimg;
+    }
+    print(imgurl);
+    return imgurl;
   }
 }

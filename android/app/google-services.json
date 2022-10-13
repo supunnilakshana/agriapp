@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "640258360621",
+    "firebase_url": "https://agri-app-f387a-default-rtdb.firebaseio.com",
+    "project_id": "agri-app-f387a",
+    "storage_bucket": "agri-app-f387a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640258360621:android:c1cfd1770a905ffafbffa4",
+        "android_client_info": {
+          "package_name": "com.example.agriapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640258360621-q0csbkaanrc2hn2iemebfu7vliunh6ep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEjYfFCXLG6lwNCe_xUawn-T1cxCcBaY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640258360621-q0csbkaanrc2hn2iemebfu7vliunh6ep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
