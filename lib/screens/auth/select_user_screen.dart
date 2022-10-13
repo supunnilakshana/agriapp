@@ -1,4 +1,6 @@
 import 'package:agriapp/constants/constraints.dart';
+import 'package:agriapp/screens/auth/sign_up_expert.dart';
+import 'package:agriapp/screens/auth/sign_up_f_officer.dart';
 import 'package:agriapp/screens/auth/sign_up_famer.dart';
 import 'package:flutter/material.dart';
 
@@ -65,15 +67,14 @@ class SelectUserScreen extends StatelessWidget {
                       size: size,
                     ),
                     onTap: () {
-                      print("dog");
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) {
-                      //       return AddPetscreen(0);
-                      //     },
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SignUpFOfficer();
+                          },
+                        ),
+                      );
                     },
                   ),
                   SizedBox(
@@ -86,14 +87,14 @@ class SelectUserScreen extends StatelessWidget {
                         size: size,
                       ),
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) {
-                        //       return AddPetscreen(1);
-                        //     },
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return SignUpExpert();
+                            },
+                          ),
+                        );
                       })
                 ],
               ),

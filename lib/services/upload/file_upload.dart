@@ -7,7 +7,7 @@ class FileUploader {
 
   static Future<String> uploadImage(
       Uint8List data, String collection, String imgename) async {
-    String downloadedData = "false";
+    String downloadedData = "";
     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
         .ref('$collection/$imgename.png');
 

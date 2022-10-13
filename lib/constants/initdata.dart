@@ -4,7 +4,7 @@ const testbunimg =
 const guserimg =
     "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png";
 
-const userimagebucket = "images/users/";
+const userimagebucket = "images/users";
 const postimagebucket = "images/posts/";
 
 const int resok = 1;

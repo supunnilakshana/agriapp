@@ -21,19 +21,20 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 
-class SignUpFamer extends StatefulWidget {
-  const SignUpFamer({Key? key}) : super(key: key);
+class SignUpExpert extends StatefulWidget {
+  const SignUpExpert({Key? key}) : super(key: key);
 
   @override
-  State<SignUpFamer> createState() => _SignUpFamerState();
+  State<SignUpExpert> createState() => _SignUpExpertState();
 }
 
-class _SignUpFamerState extends State<SignUpFamer> {
+class _SignUpExpertState extends State<SignUpExpert> {
   String _email = "";
   String _passWord = "";
   String _name = "";
   String _mobile = "";
   String _city = "";
+  String _addr = "";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _uncon = TextEditingController();
@@ -41,6 +42,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
   final TextEditingController _namecon = TextEditingController();
   final TextEditingController _mobilecon = TextEditingController();
   final TextEditingController _citycon = TextEditingController();
+  final TextEditingController _addrcon = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -77,7 +79,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                         height: 10,
                       ),
                       const Text(
-                        "Hello Farmer!! ",
+                        "Hello Expert!! ",
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       SizedBox(height: size.height * 0.01),
@@ -118,7 +120,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                       : CircleAvatar(
                                           radius: size.width * 0.17,
                                           backgroundImage: const AssetImage(
-                                              "assets/icons/farmer.png"),
+                                              "assets/icons/expert.png"),
                                         ),
                                   Positioned(
                                       bottom: 0,
@@ -183,27 +185,6 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                             bottom: BorderSide(
                                                 color: Colors.grey.shade200))),
                                     child: TextFormField(
-                                      controller: _citycon,
-                                      onChanged: (value) {
-                                        _city = value;
-                                      },
-                                      validator: (value) {
-                                        return Validater.genaralvalid(value!);
-                                      },
-                                      decoration: const InputDecoration(
-                                          hintText: "City",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey.shade200))),
-                                    child: TextFormField(
                                       controller: _uncon,
                                       onChanged: (value) {
                                         _email = value;
@@ -234,6 +215,28 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                       },
                                       decoration: const InputDecoration(
                                           hintText: "Mobile No",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                          border: InputBorder.none),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                color: Colors.grey.shade200))),
+                                    child: TextFormField(
+                                      maxLines: 2,
+                                      controller: _addrcon,
+                                      onChanged: (value) {
+                                        _addr = value;
+                                      },
+                                      validator: (value) {
+                                        return Validater.genaralvalid(value!);
+                                      },
+                                      decoration: const InputDecoration(
+                                          hintText: "Address",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -297,9 +300,9 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                         name: _namecon.text,
                                         email: _uncon.text,
                                         phone: _mobilecon.text,
-                                        area: _citycon.text,
                                         imageurl: iurl,
-                                        role: UserRole.farmer.index.toString(),
+                                        address: _addrcon.text,
+                                        role: UserRole.expert.index.toString(),
                                         date: DateTime.now().toIso8601String());
                                     await FbHandeler.createDocManual(
                                         umodel.toMap(),
