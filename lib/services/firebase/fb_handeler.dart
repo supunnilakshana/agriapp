@@ -1,12 +1,16 @@
 import 'package:agriapp/constants/initdata.dart';
+import 'package:agriapp/models/msgModel.dart';
 import 'package:agriapp/models/postmodel.dart';
 import 'package:agriapp/models/usermodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class FbHandeler {
   static final user = FirebaseAuth.instance.currentUser;
   static final firestoreInstance = FirebaseFirestore.instance;
+  static final DatabaseReference dbRef = FirebaseDatabase.instance.ref();
+  static const String chatboxpath = "chatbox";
 
 //check doc is exists
   static Future<int> checkdocstatus(String collectionpath, String docid) async {
@@ -148,5 +152,39 @@ class FbHandeler {
     print(enlist);
     enlist.sort((a, b) => b.name.compareTo(a.name));
     return enlist;
+  }
+
+  //send msg
+  static Future<int> sendMsgs(MsgModel msgModel) async {
+    int res = 0;
+    try {
+      DatabaseReference ref;
+
+      //sender
+      ref = FirebaseDatabase.instance.ref(
+          "users/${user!.uid}/$chatboxpath/${msgModel.reciveid}/${msgModel.id}");
+//reciver
+      await ref.set(msgModel.toMap());
+      print("addedsenserm");
+      ref = FirebaseDatabase.instance.ref(
+          "users/${msgModel.reciveid}/$chatboxpath/${msgModel.sendid}/${msgModel.id}");
+
+      await ref.set(msgModel.toMap());
+      print("addedreceverm");
+      res = 1;
+    } on Exception catch (e) {
+      print(e);
+    }
+    return res;
+  }
+
+//realtimedb
+  static Future<int> checkfiledstatus(String collectionpath) async {
+    final snapshot = await dbRef.child('$collectionpath').get();
+    if (snapshot.exists) {
+      return 0;
+    } else {
+      return 1;
+    }
   }
 }
