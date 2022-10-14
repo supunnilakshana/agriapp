@@ -114,7 +114,7 @@ class FbHandeler {
   }
 
   //commiunity
-  static Future<List<PostModel>> getallPetNews() async {
+  static Future<List<PostModel>> getallPost() async {
     List<PostModel> enlist = [];
     PostModel enmodel;
     QuerySnapshot querySnapshot =
@@ -122,12 +122,12 @@ class FbHandeler {
     for (int i = 0; i < querySnapshot.docs.length; i++) {
       var a = querySnapshot.docs[i];
       print(a.data());
-      enmodel = PostModel.fromMap(a.data() as Map<String, dynamic>);
+      enmodel = PostModel.fromMap(a.data() as Map<String, dynamic>, a.id);
       enlist.add(enmodel);
       print("passed");
     }
     print(enlist);
-    enlist.sort((a, b) => b.id.compareTo(a.id));
+    enlist.sort((a, b) => b.addeddate.compareTo(a.addeddate));
     return enlist;
   }
 }

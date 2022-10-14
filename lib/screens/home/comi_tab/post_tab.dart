@@ -1,7 +1,9 @@
 import 'package:agriapp/components/errorpage.dart';
 import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/models/postmodel.dart';
+import 'package:agriapp/screens/home/comi_tab/create_post.dart';
 import 'package:agriapp/screens/home/comi_tab/news_item.dart';
+import 'package:agriapp/services/firebase/fb_handeler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
@@ -9,21 +11,21 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:lottie/lottie.dart';
 
-class PetNewsTab extends StatefulWidget {
-  const PetNewsTab({
+class PostTab extends StatefulWidget {
+  const PostTab({
     Key? key,
   }) : super(key: key);
   @override
-  _PetNewsTabState createState() => _PetNewsTabState();
+  _PostTabState createState() => _PostTabState();
 }
 
-class _PetNewsTabState extends State<PetNewsTab> {
+class _PostTabState extends State<PostTab> {
   late Future<List<PostModel>> futureData;
 
   @override
   void initState() {
     super.initState();
-    futureData = FireDBHandeler.getallPetNews();
+    futureData = FbHandeler.getallPost();
   }
 
   @override
@@ -32,6 +34,23 @@ class _PetNewsTabState extends State<PetNewsTab> {
 
     return Scaffold(
         backgroundColor: Colors.green.withOpacity(0.2),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () async {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) {
+              //       return const CreatePostScreen();
+              //     },
+              //   ),
+              // );
+              Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CreatePostScreen()))
+                  .then((val) => val ? loaddata() : null);
+            },
+            label: const Text("Create a post")),
         body: Container(
           child: Column(
             children: [
@@ -55,7 +74,7 @@ class _PetNewsTabState extends State<PetNewsTab> {
                             width: size.width * 0.02,
                           ),
                           Text(
-                            "SmartCommiunity",
+                            "Smart Commiunity",
                             style: TextStyle(
                                 fontSize: size.width * 0.08,
                                 color: Colors.white),
@@ -82,7 +101,7 @@ class _PetNewsTabState extends State<PetNewsTab> {
                               Lottie.asset("assets/animations/newsno.json",
                                   width: size.width * 0.75),
                               Text(
-                                "No News just",
+                                "No Posts just",
                                 overflow: TextOverflow.fade,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
@@ -112,7 +131,7 @@ class _PetNewsTabState extends State<PetNewsTab> {
                       // By default show a loading spinner.
                       return Center(
                           child: Lottie.asset(
-                              "assets/animations/loadingdots.json",
+                              "assets/animations/loadinganimi.json",
                               width: size.width * 0.6));
                     },
                   ),
@@ -124,7 +143,7 @@ class _PetNewsTabState extends State<PetNewsTab> {
   }
 
   loaddata() async {
-    futureData = FireDBHandeler.getallPetNews();
+    futureData = FbHandeler.getallPost();
     setState(() {});
   }
 }

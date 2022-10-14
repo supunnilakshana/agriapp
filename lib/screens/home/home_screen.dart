@@ -1,5 +1,6 @@
 import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/models/usermodel.dart';
+import 'package:agriapp/screens/home/comi_tab/post_tab.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -9,7 +10,7 @@ import 'package:provider/provider.dart';
 class HomeScreen extends StatefulWidget {
   final int index;
 
-  const HomeScreen({Key? key, this.index = 1}) : super(key: key);
+  const HomeScreen({Key? key, this.index = 0}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -20,6 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final user = FirebaseAuth.instance.currentUser;
 
   int _selectedIndex = 0;
+  @override
+  void initState() {
+    _selectedIndex = widget.index;
+    super.initState();
+  }
+
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   DateTime pre_backpress = DateTime.now();
@@ -30,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Widget> _widgetOptions = <Widget>[
       Text(userModel.role),
       const Text("data"),
-      const Text("data"),
+      const PostTab()
     ];
     return WillPopScope(
       onWillPop: () {

@@ -40,52 +40,58 @@ class _NewsItemState extends State<NewsItem> {
                 padding: EdgeInsets.only(
                     left: size.width * 0.015,
                     right: size.width * 0.015,
-                    top: size.height * 0.02,
-                    bottom: size.height * 0.03),
+                    top: size.height * 0.012,
+                    bottom: size.height * 0.015),
                 child: Text(
                   widget.postmodel.title,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black.withOpacity(0.7),
-                      fontSize: size.width * 0.065,
+                      fontSize: size.width * 0.05,
                       fontWeight: FontWeight.w400),
                 ),
               ),
-              Container(
-                  // width: size.width * 0.8,
-                  decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(size.width * 0)),
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //     color: Colors.blueGrey.shade100,
-                    //     blurRadius: 2.0,
-                    //     spreadRadius: 2.0,
-                    //     offset: Offset(
-                    //       3.0,
-                    //       3.0,
-                    //     ),
-                    //   )
-                    // ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(size.width * 0.05)),
-                    child: CachedNetworkImage(
-                      fit: BoxFit.cover,
-                      imageUrl: widget.postmodel.imageurl,
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) => Container(
-                        //  height: size.height * 0.01,
-                        child: Center(
-                          child: CircularProgressIndicator(
-                              color: Colors.green.shade800,
-                              value: downloadProgress.progress),
-                        ),
-                      ),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: size.width * 0.04,
+                  right: size.width * 0.04,
+                ),
+                child: Container(
+                    // width: size.width * 0.8,
+                    decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(size.width * 0)),
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.blueGrey.shade100,
+                      //     blurRadius: 2.0,
+                      //     spreadRadius: 2.0,
+                      //     offset: Offset(
+                      //       3.0,
+                      //       3.0,
+                      //     ),
+                      //   )
+                      // ],
                     ),
-                  )),
+                    child: ClipRRect(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(size.width * 0.05)),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: widget.postmodel.imageurl,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) => Container(
+                          //  height: size.height * 0.01,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                                color: Colors.green.shade800,
+                                value: downloadProgress.progress),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                    )),
+              ),
               Padding(
                 padding: EdgeInsets.only(
                     top: size.height * 0.023, bottom: size.height * 0.018),
@@ -93,7 +99,7 @@ class _NewsItemState extends State<NewsItem> {
                   widget.postmodel.context,
                   trimLength: 250,
                   style: TextStyle(
-                    fontSize: size.width * 0.043,
+                    fontSize: size.width * 0.035,
                     color: Colors.black.withOpacity(0.7),
                   ),
                 ),
@@ -101,11 +107,9 @@ class _NewsItemState extends State<NewsItem> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  isedit
-                      ? LineIcon.edit(color: Colors.black.withOpacity(0.6))
-                      : LineIcon.pen(color: Colors.black.withOpacity(0.6)),
+                  LineIcon.pen(color: Colors.black.withOpacity(0.6)),
                   Text(
-                    date,
+                    widget.postmodel.addeddate,
                     style: TextStyle(color: Colors.black.withOpacity(0.6)),
                   )
                 ],

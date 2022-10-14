@@ -1,38 +1,40 @@
+import 'package:agriapp/models/usermodel.dart';
+
 class PostModel {
-  final String id;
+  final String? id;
   final String title;
   final String context;
   final String addeddate;
   final String userid;
-  final String userrole;
+  final UserModel user;
   final String imageurl;
 
   PostModel(
-      {required this.id,
+      {this.id,
       required this.title,
       required this.context,
       required this.addeddate,
-      required this.userrole,
-      this.userid = "",
-      this.imageurl = ""});
+      required this.user,
+      required this.userid,
+      required this.imageurl});
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      // 'id': id,
       'titel': title,
       'context': context,
       'addeddate': addeddate,
-      'userole': userrole,
+      'user': user.toMap(),
       'userid': userid,
       'imageurl': imageurl
     };
   }
 
-  factory PostModel.fromMap(Map<String, dynamic> res) {
+  factory PostModel.fromMap(Map<String, dynamic> res, String id) {
     return PostModel(
-        id: res['id'],
+        id: id,
         title: res['titel'],
         context: res['context'],
-        userrole: res['userole'],
+        user: UserModel.fromMap(res['user']),
         addeddate: res['addeddate'],
         userid: res['userid'],
         imageurl: res['imageurl']);
