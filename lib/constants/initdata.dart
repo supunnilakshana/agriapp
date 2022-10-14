@@ -37,3 +37,17 @@ final months = [
 ];
 
 enum UserRole { farmer, fofficer, expert }
+
+String getpossition(String role) {
+  int r = int.parse(role);
+
+  if (r == 0) {
+    return "Farmer";
+  } else if (r == 1) {
+    return "Field Officer";
+  } else if (r == 2) {
+    return "Expert";
+  } else {
+    return "Unknown";
+  }
+}

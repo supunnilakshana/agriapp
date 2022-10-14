@@ -1,3 +1,4 @@
+import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/postmodel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class NewsItem extends StatefulWidget {
 class _NewsItemState extends State<NewsItem> {
   bool isedit = false;
   bool isShadow = false;
+  bool islike = false;
   String date = '';
   @override
   void initState() {
@@ -36,11 +38,65 @@ class _NewsItemState extends State<NewsItem> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Row(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: size.width * 0.06,
+                              backgroundImage:
+                                  NetworkImage(widget.postmodel.user.imageurl),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.postmodel.user.name,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.7),
+                                        fontSize: size.width * 0.04,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    getpossition(widget.postmodel.user.role),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.5),
+                                        fontSize: size.width * 0.03,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                      flex: 1,
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.share,
+                            color: Colors.black.withOpacity(0.7),
+                          )
+                        ],
+                      ))
+                ],
+              ),
               Padding(
                 padding: EdgeInsets.only(
                     left: size.width * 0.015,
                     right: size.width * 0.015,
-                    top: size.height * 0.012,
+                    // top: size.height * 0.012,
                     bottom: size.height * 0.015),
                 child: Text(
                   widget.postmodel.title,
@@ -105,13 +161,57 @@ class _NewsItemState extends State<NewsItem> {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  LineIcon.pen(color: Colors.black.withOpacity(0.6)),
-                  Text(
-                    widget.postmodel.addeddate,
-                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                  )
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: GestureDetector(
+                                child: islike
+                                    ? LineIcon.heartAlt(
+                                        color: Colors.green.shade600
+                                            .withOpacity(0.9))
+                                    : LineIcon.heart(
+                                        color: Colors.black.withOpacity(0.9)),
+                                onTap: () {
+                                  if (islike == false) {
+                                    islike = true;
+                                  } else {
+                                    islike = false;
+                                  }
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+                            LineIcon.comments(
+                                color: Colors.black.withOpacity(0.9)),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            LineIcon.pen(color: Colors.black.withOpacity(0.6)),
+                            Text(
+                              widget.postmodel.addeddate,
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.6)),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               )
             ],

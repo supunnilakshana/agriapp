@@ -130,4 +130,23 @@ class FbHandeler {
     enlist.sort((a, b) => b.addeddate.compareTo(a.addeddate));
     return enlist;
   }
+
+  static Future<List<UserModel>> getalluserspec(String r) async {
+    List<UserModel> enlist = [];
+    UserModel enmodel;
+    QuerySnapshot querySnapshot = await firestoreInstance
+        .collection(CollectionPath.userpath)
+        .where("role", isEqualTo: r)
+        .get();
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      var a = querySnapshot.docs[i];
+      print(a.data());
+      enmodel = UserModel.fromMap(a.data() as Map<String, dynamic>);
+      enlist.add(enmodel);
+      print("passed");
+    }
+    print(enlist);
+    enlist.sort((a, b) => b.name.compareTo(a.name));
+    return enlist;
+  }
 }

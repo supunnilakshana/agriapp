@@ -46,7 +46,9 @@ class PopupDialog {
       btnCancelText: "No",
       btnOkText: "Yes",
       btnCancelOnPress: () {},
-      btnOkOnPress: actionFun(),
+      btnOkOnPress: () {
+        actionFun();
+      },
     ).show();
   }
 

@@ -38,7 +38,7 @@ class SelectUserScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                    height: size.height * 0.02,
+                    height: size.height * 0.1,
                   ),
                   GestureDetector(
                     child: SelectpetItem(
@@ -58,7 +58,7 @@ class SelectUserScreen extends StatelessWidget {
                     },
                   ),
                   SizedBox(
-                    height: size.height * 0.02,
+                    height: size.height * 0.05,
                   ),
                   GestureDetector(
                     child: SelectpetItem(
@@ -78,7 +78,7 @@ class SelectUserScreen extends StatelessWidget {
                     },
                   ),
                   SizedBox(
-                    height: size.height * 0.02,
+                    height: size.height * 0.05,
                   ),
                   GestureDetector(
                       child: SelectpetItem(
@@ -128,7 +128,7 @@ class SelectpetItem extends StatelessWidget {
       child: Container(
         width: size.width * 0.6,
         decoration: BoxDecoration(
-          color: kPrimaryColordark.withOpacity(0.7),
+          color: kPrimaryColordark.withOpacity(0.6),
           borderRadius: BorderRadius.all(Radius.circular(size.width * 0.05)),
         ),
         child: Column(
@@ -158,7 +158,7 @@ class SelectpetItem extends StatelessWidget {
                       BorderRadius.all(Radius.circular(size.width * 0.05)),
                   child: Image.asset(
                     img,
-                    width: size.width * 0.4,
+                    width: size.width * 0.2,
                   ),
                 ),
               ),
@@ -171,7 +171,7 @@ class SelectpetItem extends StatelessWidget {
                 style: TextStyle(
                     fontSize: size.width * 0.06,
                     color: Colors.white.withOpacity(0.8),
-                    fontWeight: FontWeight.w700),
+                    fontWeight: FontWeight.w500),
               ),
             ),
           ],
