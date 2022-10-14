@@ -6,7 +6,7 @@ import 'package:agriapp/components/or_divider.dart';
 import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/usermodel.dart';
-import 'package:agriapp/screens/auth/auth_checking.dart';
+import 'package:agriapp/screens/auth/load_userdata.dart';
 import 'package:agriapp/screens/auth/sign_in.dart';
 import 'package:agriapp/services/auth/signin_mannager.dart';
 import 'package:agriapp/services/date_time/date.dart';
@@ -20,6 +20,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
+
+import 'check_signIn.dart';
 
 class SignUpExpert extends StatefulWidget {
   const SignUpExpert({Key? key}) : super(key: key);
@@ -313,7 +315,7 @@ class _SignUpExpertState extends State<SignUpExpert> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return const AuthCheckScreen();
+                                          return const CheckSignIn();
                                         },
                                       ),
                                     );

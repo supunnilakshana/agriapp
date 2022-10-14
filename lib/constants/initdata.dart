@@ -13,14 +13,7 @@ const String sucesscode = "sucessfull";
 
 class CollectionPath {
   static const userpath = "users/";
-  static const reorderdocmpath = "reorder";
-  static const trashpath = "trash";
-  static const invoicehpath = "invoice";
-  static const customermpath = "customer";
-  static const orderpath = "orders";
-  static const supplier = "supplier";
-  static const notitokenpath = "notitoken";
-  static const promospath = "promos";
+  static const postpath = "post";
 }
 
 class ItemType {

@@ -2,7 +2,8 @@
 
 import 'dart:async';
 
-import 'package:agriapp/screens/auth/auth_checking.dart';
+import 'package:agriapp/screens/auth/check_signIn.dart';
+import 'package:agriapp/screens/auth/load_userdata.dart';
 import 'package:agriapp/screens/auth/sign_in.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +37,7 @@ class StartState extends State<SplashScreen> {
 
   route() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => SignIn()));
+        context, MaterialPageRoute(builder: (context) => CheckSignIn()));
   }
 
   initScreen(BuildContext context) {

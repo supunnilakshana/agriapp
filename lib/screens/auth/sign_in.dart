@@ -1,7 +1,9 @@
 import 'package:agriapp/components/already_have_an_account_acheck.dart';
 import 'package:agriapp/components/or_divider.dart';
 import 'package:agriapp/constants/constraints.dart';
-import 'package:agriapp/screens/auth/auth_checking.dart';
+import 'package:agriapp/constants/initdata.dart';
+import 'package:agriapp/screens/auth/load_userdata.dart';
+import 'package:agriapp/screens/auth/check_signIn.dart';
 import 'package:agriapp/screens/auth/select_user_screen.dart';
 import 'package:agriapp/screens/auth/sign_up_famer.dart';
 import 'package:agriapp/services/auth/signin_mannager.dart';
@@ -166,25 +168,27 @@ class _SignInState extends State<SignIn> {
                                       .signIn(_email.trim(), _passWord);
                                   print(r.toString() +
                                       "------------------------------------------");
-                                  if (r == 0) {
+                                  if (r == resok) {
                                     print("loged");
+                                    // ignore: use_build_context_synchronously
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return AuthCheckScreen();
+                                          return const CheckSignIn();
                                         },
                                       ),
                                     );
-                                  } else if (r == 1) {
+                                  } else if (r == resfail) {
                                     Get.snackbar(
                                       "Signin failed",
                                       "Please enter the correct email or password",
+                                      backgroundColor: Colors.red,
                                       icon: const Icon(Icons.error,
                                           color: Colors.white),
                                       snackPosition: SnackPosition.BOTTOM,
                                     );
-                                  } else if (r == 2) {
+                                  } else if (r == resfail) {
                                     Get.snackbar(
                                       "Signin failed",
                                       "Please enter the correct email or password",

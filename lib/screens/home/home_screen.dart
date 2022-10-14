@@ -1,8 +1,10 @@
 import 'package:agriapp/constants/constraints.dart';
+import 'package:agriapp/models/usermodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   final int index;
@@ -13,7 +15,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  late Future<UserModel> futureData;
   final user = FirebaseAuth.instance.currentUser;
 
   int _selectedIndex = 0;
@@ -23,7 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var userModel = Provider.of<UserModel>(context);
     List<Widget> _widgetOptions = <Widget>[
+      Text(userModel.role),
+      const Text("data"),
       const Text("data"),
     ];
     return WillPopScope(
@@ -43,13 +49,14 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
       child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Colors.white,
         body: Center(
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: kPrimaryColorlight,
             boxShadow: [
               BoxShadow(
                 blurRadius: 20,
@@ -70,18 +77,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 duration: const Duration(milliseconds: 300),
-                tabBackgroundColor: Colors.greenAccent.withOpacity(0.7),
+                tabBackgroundColor: Colors.green.shade800.withOpacity(0.7),
                 color: Colors.black,
-                tabs: [
-                  const GButton(
+                tabs: const [
+                  GButton(
                     icon: LineIcons.home,
                     text: 'Home',
                   ),
-                  const GButton(
+                  GButton(
                     icon: LineIcons.calendarAlt,
                     text: 'Events',
                   ),
-                  const GButton(
+                  GButton(
                     icon: LineIcons.globe,
                     text: 'Updates',
                   ),

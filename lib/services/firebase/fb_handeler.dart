@@ -1,4 +1,6 @@
 import 'package:agriapp/constants/initdata.dart';
+import 'package:agriapp/models/postmodel.dart';
+import 'package:agriapp/models/usermodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -96,5 +98,36 @@ class FbHandeler {
       res = resfail;
     }
     return res;
+  }
+
+//get user details
+
+  static Future<UserModel> getUser() async {
+    String uid = user!.uid.toString();
+    const String collectionpath = "/users/";
+    UserModel model;
+
+    DocumentSnapshot documentSnapshot =
+        await firestoreInstance.collection(collectionpath).doc(uid).get();
+    model = UserModel.fromMap(documentSnapshot.data() as Map<String, dynamic>);
+    return model;
+  }
+
+  //commiunity
+  static Future<List<PostModel>> getallPetNews() async {
+    List<PostModel> enlist = [];
+    PostModel enmodel;
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection(CollectionPath.postpath).get();
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      var a = querySnapshot.docs[i];
+      print(a.data());
+      enmodel = PostModel.fromMap(a.data() as Map<String, dynamic>);
+      enlist.add(enmodel);
+      print("passed");
+    }
+    print(enlist);
+    enlist.sort((a, b) => b.id.compareTo(a.id));
+    return enlist;
   }
 }

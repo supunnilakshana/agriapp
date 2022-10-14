@@ -6,7 +6,8 @@ import 'package:agriapp/components/or_divider.dart';
 import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/usermodel.dart';
-import 'package:agriapp/screens/auth/auth_checking.dart';
+import 'package:agriapp/screens/auth/load_userdata.dart';
+import 'package:agriapp/screens/auth/check_signIn.dart';
 import 'package:agriapp/screens/auth/sign_in.dart';
 import 'package:agriapp/services/auth/signin_mannager.dart';
 import 'package:agriapp/services/date_time/date.dart';
@@ -336,7 +337,7 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return const AuthCheckScreen();
+                                          return const CheckSignIn();
                                         },
                                       ),
                                     );
