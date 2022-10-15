@@ -99,7 +99,7 @@ class _SingelChatScreenState extends State<SingelChatScreen>
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final scolor = Colors.green.shade200;
-    final rcolor = Colors.green.shade200;
+    final rcolor = Colors.blueGrey.shade200;
     return Form(
       key: _formKey,
       child: GestureDetector(
@@ -384,7 +384,574 @@ class _SingelChatScreenState extends State<SingelChatScreen>
                           },
                         ),
                       )),
-                      // Align(
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Card(
+                          color: const Color.fromARGB(255, 184, 226, 201),
+                          margin: EdgeInsets.zero,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                right: 8,
+                                left: 8,
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom > 0
+                                        ? 5
+                                        : 8,
+                                top: 8),
+                            child: Column(
+                              children: [
+                                isfileload
+                                    ? isimg
+                                        ? Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8, right: 8),
+                                            child: Card(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                              color: kPrimaryColorlight,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: isfilesending
+                                                          ? Lottie.asset(
+                                                              "assets/animations/filesuploading.json",
+                                                              width:
+                                                                  size.width *
+                                                                      0.1)
+                                                          : GestureDetector(
+                                                              onTap: () {
+                                                                isfileload =
+                                                                    false;
+                                                                isfilesending =
+                                                                    false;
+                                                                isimg = false;
+                                                                setState(() {});
+                                                              },
+                                                              child: const Icon(
+                                                                  Icons.close)),
+                                                    ),
+                                                    Container(
+                                                      height: size.height * 0.5,
+                                                      width: size.width * 0.7,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15.0),
+                                                      ),
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15.0),
+                                                        child: Image.file(
+                                                          sendfile!,
+                                                          // height: size.height * 0.5,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              5.0),
+                                                      child: Text(fileName),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8, right: 8),
+                                            child: Card(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                              color: kPrimaryColorlight,
+                                              child: ListTile(
+                                                leading: const Icon(
+                                                  Icons.file_present_outlined,
+                                                ),
+                                                title: Text(fileName),
+                                                trailing: isfilesending
+                                                    ? Lottie.asset(
+                                                        "assets/animations/filesuploading.json",
+                                                        width: size.width * 0.1)
+                                                    : GestureDetector(
+                                                        onTap: () {
+                                                          isfileload = false;
+                                                          isfilesending = false;
+                                                          isimg = false;
+                                                          setState(() {});
+                                                        },
+                                                        child: const Icon(
+                                                            Icons.close)),
+                                              ),
+                                            ),
+                                          )
+                                    : Container(),
+                                Stack(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Expanded(
+                                          child: SlideTransition(
+                                            position: slideInputAnimation,
+                                            child: Row(
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    _chooeseFile();
+                                                  },
+                                                  child: Icon(
+                                                    Icons.attach_file,
+                                                    color: Colors.grey.shade700,
+                                                    size: 23,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    _showPicker(context);
+                                                  },
+                                                  child: Icon(
+                                                    Icons.camera_alt,
+                                                    color: Colors.grey.shade700,
+                                                    size: 23,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 8,
+                                                ),
+                                                Expanded(
+                                                  child: Container(
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            bottom: 5),
+                                                    child: TextField(
+                                                      controller:
+                                                          textController,
+                                                      minLines: 1,
+                                                      maxLines: 5,
+                                                      cursorColor:
+                                                          kPrimaryColordark,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        isDense: true,
+                                                        contentPadding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 16,
+                                                                left: 20,
+                                                                bottom: 12,
+                                                                top: 12),
+                                                        hintStyle: TextStyle(
+                                                            fontSize: 14,
+                                                            color: Colors
+                                                                .grey.shade700),
+                                                        hintText:
+                                                            'Type a message...',
+                                                        border:
+                                                            InputBorder.none,
+                                                        filled: true,
+                                                        fillColor: Colors
+                                                            .grey.shade100,
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(20),
+                                                          gapPadding: 0,
+                                                          borderSide: BorderSide(
+                                                              color: Colors.grey
+                                                                  .shade200),
+                                                        ),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(20),
+                                                          gapPadding: 0,
+                                                          borderSide: BorderSide(
+                                                              color: Colors.grey
+                                                                  .shade300),
+                                                        ),
+                                                      ),
+                                                      onChanged: (value) {
+                                                        if (value.isNotEmpty) {
+                                                          hideTheMic();
+                                                        } else {
+                                                          showTheMic();
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Visibility(
+                                              visible: isVisible,
+                                              child: FadeTransition(
+                                                opacity: opacity,
+                                                child: Icon(
+                                                  Icons.mic,
+                                                  color: Colors.grey.shade700,
+                                                ),
+                                              ),
+                                            ),
+                                            IconButton(
+                                              splashRadius: 20,
+                                              color: kPrimaryColordark,
+                                              icon: Icon(
+                                                Icons.send,
+                                                color: isVisible
+                                                    ? Colors.grey.shade700
+                                                    : kPrimaryColordark,
+                                              ),
+                                              onPressed: isfilesending
+                                                  ? () {
+                                                      setscroll();
+                                                      Customtost.commontost(
+                                                          "file sending..",
+                                                          kPrimaryColordark);
+                                                    }
+                                                  : () async {
+                                                      setscroll();
+                                                      // print(msgList.length);
+                                                      print("pressed");
+
+                                                      if (isfileload) {
+                                                        setState(() {
+                                                          isfilesending = true;
+                                                        });
+                                                        print("press");
+
+                                                        final extension =
+                                                            p.extension(
+                                                                sendfile!.path);
+
+                                                        print(extension);
+                                                        String id = FbHandeler
+                                                                .user!.uid +
+                                                            Date.getDateTimeId();
+                                                        String vlink =
+                                                            await FileUploader
+                                                                .uploadData(
+                                                                    sendfile!,
+                                                                    id +
+                                                                        extension);
+                                                        print(vlink);
+
+                                                        if (vlink != "false") {
+                                                          MsgModel modelM = MsgModel(
+                                                              fname: fileName,
+                                                              id: id,
+                                                              sendemail:
+                                                                  FbHandeler
+                                                                      .user!
+                                                                      .email!,
+                                                              reciveemail:
+                                                                  widget.email,
+                                                              message: vlink,
+                                                              msgtype: mesgtype,
+                                                              datetime: Date
+                                                                  .getStringdatetimenow(),
+                                                              datetimeid: Date
+                                                                  .getDateTimeId(),
+                                                              sendid: FbHandeler
+                                                                  .user!.uid,
+                                                              reciveid:
+                                                                  widget.rid);
+
+                                                          int res1 =
+                                                              await FbHandeler
+                                                                  .sendMsgs(
+                                                                      modelM);
+                                                          if (res1 == 1) {
+                                                            isfileload = false;
+                                                            isfilesending =
+                                                                false;
+                                                            isimg = false;
+                                                            setState(() {});
+                                                            loaddata();
+                                                            setscroll();
+                                                          } else {
+                                                            setState(() {
+                                                              isfilesending =
+                                                                  false;
+                                                            });
+                                                            Customtost.commontost(
+                                                                "Sending failed",
+                                                                Colors
+                                                                    .redAccent);
+                                                          }
+                                                        } else {
+                                                          setState(() {
+                                                            isfilesending =
+                                                                false;
+                                                          });
+                                                          Customtost.commontost(
+                                                              "Sending failed",
+                                                              Colors.redAccent);
+                                                        }
+                                                      } else {
+                                                        if (textController
+                                                            .text.isNotEmpty) {
+                                                          final id = FbHandeler
+                                                                  .user!.uid +
+                                                              Date.getDateTimeId();
+
+                                                          MsgModel modelM = MsgModel(
+                                                              id: id,
+                                                              sendemail:
+                                                                  FbHandeler
+                                                                      .user!
+                                                                      .email!,
+                                                              reciveemail:
+                                                                  widget.email,
+                                                              message:
+                                                                  textController
+                                                                      .text,
+                                                              msgtype: "tmsg",
+                                                              datetime: Date
+                                                                  .getStringdatetimenow(),
+                                                              datetimeid: Date
+                                                                  .getDateTimeId(),
+                                                              sendid: FbHandeler
+                                                                  .user!.uid,
+                                                              reciveid:
+                                                                  widget.rid);
+
+                                                          await FbHandeler
+                                                              .sendMsgs(modelM);
+                                                          print("done");
+                                                          nochat = 1;
+
+                                                          textController
+                                                              .clear();
+                                                          showTheMic();
+                                                          loaddata();
+                                                          setscroll();
+                                                          setState(() {});
+                                                        }
+                                                      }
+                                                      if (_formKey.currentState!
+                                                          .validate()) {}
+                                                    },
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+        ),
+      ),
+    );
+  }
+
+  final textController = TextEditingController();
+
+  late Animation<double> opacity;
+  late AnimationController slideInputController;
+  late Animation<Offset> slideInputAnimation;
+  var isVisible = true;
+  hideTheMic() {
+    controller.play();
+    controller.addStatusListener((status) {
+      setState(() {
+        if (status == AnimationStatus.completed && isVisible) {
+          isVisible = false;
+        }
+      });
+    });
+  }
+
+  showTheMic() {
+    isVisible = true;
+    controller.reverse();
+  }
+
+  loaddata() async {
+    futureData = FbHandeler.checkfiledstatus(
+        "users/${FbHandeler.user!.uid}/chatbox/${widget.rid}");
+
+    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  File? sendfile;
+  String fileExtesnsion = "";
+  String fileName = "";
+  bool isfileload = false;
+  bool isfilesending = false;
+  bool isimg = false;
+  String mesgtype = "file";
+
+  _chooeseFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      File file = File(result.files.single.path!);
+      setState(() {
+        sendfile = file;
+
+        final path = file.path;
+        print(path);
+        final extension = p.extension(path);
+        fileExtesnsion = extension;
+        mesgtype = "file";
+        print(extension);
+        fileName = path.split('/').last;
+
+        isfileload = true;
+        print("okkkkkkkkkkkk");
+
+        // widget.onimgfileChanged(base64Image);
+      });
+    } else {
+      // User canceled the picker
+    }
+  }
+
+  XFile? imgfile;
+  final ImagePicker _picker = ImagePicker();
+  _imgFromGallery() async {
+    XFile? img =
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 65);
+
+    if (img != null) {
+      setState(() {
+        imgfile = img;
+        sendfile = File(imgfile!.path);
+        final path = imgfile!.path;
+        print(path);
+        final extension = p.extension(path);
+        fileExtesnsion = extension;
+        mesgtype = "img";
+        print(extension);
+        fileName = path.split('/').last;
+        isfileload = true;
+        isimg = true;
+        print("okkkkkkkkkkkk");
+
+        // widget.onimgfileChanged(base64Image);
+      });
+    }
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              color: const Color.fromARGB(255, 184, 226, 201),
+              child: Wrap(
+                children: <Widget>[
+                  ListTile(
+                      leading: const Icon(Icons.photo_library_outlined),
+                      title: const Text('Gallery'),
+                      onTap: () {
+                        _imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  ListTile(
+                    leading: const Icon(Icons.camera_alt_outlined),
+                    title: const Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  _imgFromCamera() async {
+    XFile? img =
+        await _picker.pickImage(source: ImageSource.camera, imageQuality: 50);
+
+    if (img != null) {
+      setState(() {
+        imgfile = img;
+        sendfile = File(imgfile!.path);
+        final path = imgfile!.path;
+        print(path);
+        final extension = p.extension(path);
+        fileExtesnsion = extension;
+        mesgtype = "img";
+        print(extension);
+        fileName = path.split('/').last;
+        isfileload = true;
+        isimg = true;
+        print("okkkkkkkkkkkk");
+
+        // widget.onimgfileChanged(base64Image);
+      });
+    }
+  }
+
+  setscroll() {
+    if (_scrollController.hasClients) {
+      print("has------------------");
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    }
+  }
+}
+
+class PathModel {
+  final String id;
+  final String path;
+
+  PathModel({required this.id, required this.path});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ // Align(
                       //   alignment: Alignment.bottomCenter,
                       //   child: Padding(
                       //     padding: const EdgeInsets.all(8.0),
@@ -702,550 +1269,3 @@ class _SingelChatScreenState extends State<SingelChatScreen>
                       //     ),
                       //   ),
                       // ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Card(
-                          color: const Color.fromARGB(255, 184, 226, 201),
-                          margin: EdgeInsets.zero,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                right: 8,
-                                left: 8,
-                                bottom:
-                                    MediaQuery.of(context).viewInsets.bottom > 0
-                                        ? 5
-                                        : 8,
-                                top: 8),
-                            child: Column(
-                              children: [
-                                isfileload
-                                    ? isimg
-                                        ? Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8, right: 8),
-                                            child: Card(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                              color: kPrimaryColordark,
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  children: [
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.topRight,
-                                                      child: isfilesending
-                                                          ? Lottie.asset(
-                                                              "assets/animations/filesuploading.json",
-                                                              width:
-                                                                  size.width *
-                                                                      0.1)
-                                                          : GestureDetector(
-                                                              onTap: () {
-                                                                isfileload =
-                                                                    false;
-                                                                isfilesending =
-                                                                    false;
-                                                                isimg = false;
-                                                                setState(() {});
-                                                              },
-                                                              child: const Icon(
-                                                                  Icons.close)),
-                                                    ),
-                                                    Container(
-                                                      height: size.height * 0.5,
-                                                      width: size.width * 0.7,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(15.0),
-                                                      ),
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(15.0),
-                                                        child: Image.file(
-                                                          sendfile!,
-                                                          // height: size.height * 0.5,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              5.0),
-                                                      child: Text(fileName),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8, right: 8),
-                                            child: Card(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                              color: kPrimaryColorlight,
-                                              child: ListTile(
-                                                leading: const Icon(
-                                                  Icons.file_present_outlined,
-                                                ),
-                                                title: Text(fileName),
-                                                trailing: isfilesending
-                                                    ? Lottie.asset(
-                                                        "assets/animations/filesuploading.json",
-                                                        width: size.width * 0.1)
-                                                    : GestureDetector(
-                                                        onTap: () {
-                                                          isfileload = false;
-                                                          isfilesending = false;
-                                                          isimg = false;
-                                                          setState(() {});
-                                                        },
-                                                        child: const Icon(
-                                                            Icons.close)),
-                                              ),
-                                            ),
-                                          )
-                                    : Container(),
-                                Stack(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Expanded(
-                                          child: SlideTransition(
-                                            position: slideInputAnimation,
-                                            child: Row(
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {},
-                                                  child: Icon(
-                                                    Icons.attach_file,
-                                                    color: Colors.grey.shade700,
-                                                    size: 23,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Icon(
-                                                  Icons.camera_alt,
-                                                  color: Colors.grey.shade700,
-                                                  size: 23,
-                                                ),
-                                                SizedBox(
-                                                  width: 8,
-                                                ),
-                                                Expanded(
-                                                  child: Container(
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            bottom: 5),
-                                                    child: TextField(
-                                                      controller:
-                                                          textController,
-                                                      minLines: 1,
-                                                      maxLines: 5,
-                                                      cursorColor:
-                                                          kPrimaryColordark,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        isDense: true,
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 16,
-                                                                left: 20,
-                                                                bottom: 12,
-                                                                top: 12),
-                                                        hintStyle: TextStyle(
-                                                            fontSize: 14,
-                                                            color: Colors
-                                                                .grey.shade700),
-                                                        hintText:
-                                                            'Type a message',
-                                                        border:
-                                                            InputBorder.none,
-                                                        filled: true,
-                                                        fillColor: Colors
-                                                            .grey.shade100,
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(20),
-                                                          gapPadding: 0,
-                                                          borderSide: BorderSide(
-                                                              color: Colors.grey
-                                                                  .shade200),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(20),
-                                                          gapPadding: 0,
-                                                          borderSide: BorderSide(
-                                                              color: Colors.grey
-                                                                  .shade300),
-                                                        ),
-                                                      ),
-                                                      onChanged: (value) {
-                                                        if (value.isNotEmpty) {
-                                                          hideTheMic();
-                                                        } else {
-                                                          showTheMic();
-                                                        }
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Visibility(
-                                              visible: isVisible,
-                                              child: FadeTransition(
-                                                opacity: opacity,
-                                                child: Icon(
-                                                  Icons.mic,
-                                                  color: Colors.grey.shade700,
-                                                ),
-                                              ),
-                                            ),
-                                            IconButton(
-                                              splashRadius: 20,
-                                              color: kPrimaryColordark,
-                                              icon: Icon(
-                                                Icons.send,
-                                                color: isVisible
-                                                    ? Colors.grey.shade700
-                                                    : kPrimaryColordark,
-                                              ),
-                                              onPressed: isfilesending
-                                                  ? () {
-                                                      setscroll();
-                                                      Customtost.commontost(
-                                                          "file sending..",
-                                                          kPrimaryColordark);
-                                                    }
-                                                  : () async {
-                                                      setscroll();
-                                                      // print(msgList.length);
-                                                      print("pressed");
-
-                                                      if (isfileload) {
-                                                        setState(() {
-                                                          isfilesending = true;
-                                                        });
-                                                        print("press");
-
-                                                        final extension =
-                                                            p.extension(
-                                                                sendfile!.path);
-
-                                                        print(extension);
-                                                        String id = FbHandeler
-                                                                .user!.uid +
-                                                            Date.getDateTimeId();
-                                                        String vlink =
-                                                            await FileUploader
-                                                                .uploadData(
-                                                                    sendfile!,
-                                                                    id +
-                                                                        extension);
-                                                        print(vlink);
-
-                                                        if (vlink != "false") {
-                                                          MsgModel modelM = MsgModel(
-                                                              fname: fileName,
-                                                              id: id,
-                                                              sendemail:
-                                                                  FbHandeler
-                                                                      .user!
-                                                                      .email!,
-                                                              reciveemail:
-                                                                  widget.email,
-                                                              message: vlink,
-                                                              msgtype: mesgtype,
-                                                              datetime: Date
-                                                                  .getStringdatetimenow(),
-                                                              datetimeid: Date
-                                                                  .getDateTimeId(),
-                                                              sendid: FbHandeler
-                                                                  .user!.uid,
-                                                              reciveid:
-                                                                  widget.rid);
-
-                                                          int res1 =
-                                                              await FbHandeler
-                                                                  .sendMsgs(
-                                                                      modelM);
-                                                          if (res1 == 1) {
-                                                            isfileload = false;
-                                                            isfilesending =
-                                                                false;
-                                                            isimg = false;
-                                                            setState(() {});
-                                                            loaddata();
-                                                            setscroll();
-                                                          } else {
-                                                            setState(() {
-                                                              isfilesending =
-                                                                  false;
-                                                            });
-                                                            Customtost.commontost(
-                                                                "Sending failed",
-                                                                Colors
-                                                                    .redAccent);
-                                                          }
-                                                        } else {
-                                                          setState(() {
-                                                            isfilesending =
-                                                                false;
-                                                          });
-                                                          Customtost.commontost(
-                                                              "Sending failed",
-                                                              Colors.redAccent);
-                                                        }
-                                                      } else {
-                                                        if (textController
-                                                            .text.isNotEmpty) {
-                                                          final id = FbHandeler
-                                                                  .user!.uid +
-                                                              Date.getDateTimeId();
-
-                                                          MsgModel modelM = MsgModel(
-                                                              id: id,
-                                                              sendemail:
-                                                                  FbHandeler
-                                                                      .user!
-                                                                      .email!,
-                                                              reciveemail:
-                                                                  widget.email,
-                                                              message:
-                                                                  textController
-                                                                      .text,
-                                                              msgtype: "tmsg",
-                                                              datetime: Date
-                                                                  .getStringdatetimenow(),
-                                                              datetimeid: Date
-                                                                  .getDateTimeId(),
-                                                              sendid: FbHandeler
-                                                                  .user!.uid,
-                                                              reciveid:
-                                                                  widget.rid);
-
-                                                          await FbHandeler
-                                                              .sendMsgs(modelM);
-                                                          print("done");
-                                                          nochat = 1;
-
-                                                          textController
-                                                              .clear();
-                                                          showTheMic();
-                                                          loaddata();
-                                                          setscroll();
-                                                          setState(() {});
-                                                        }
-                                                      }
-                                                      if (_formKey.currentState!
-                                                          .validate()) {}
-                                                    },
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-        ),
-      ),
-    );
-  }
-
-  final textController = TextEditingController();
-
-  late Animation<double> opacity;
-  late AnimationController slideInputController;
-  late Animation<Offset> slideInputAnimation;
-  var isVisible = true;
-  hideTheMic() {
-    controller.play();
-    controller.addStatusListener((status) {
-      setState(() {
-        if (status == AnimationStatus.completed && isVisible) {
-          isVisible = false;
-        }
-      });
-    });
-  }
-
-  showTheMic() {
-    isVisible = true;
-    controller.reverse();
-  }
-
-  loaddata() async {
-    futureData = FbHandeler.checkfiledstatus(
-        "users/${FbHandeler.user!.uid}/chatbox/${widget.rid}");
-
-    setState(() {});
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  File? sendfile;
-  String fileExtesnsion = "";
-  String fileName = "";
-  bool isfileload = false;
-  bool isfilesending = false;
-  bool isimg = false;
-  String mesgtype = "file";
-
-  _chooeseFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-    if (result != null) {
-      File file = File(result.files.single.path!);
-      setState(() {
-        sendfile = file;
-
-        final path = file.path;
-        print(path);
-        final extension = p.extension(path);
-        fileExtesnsion = extension;
-        mesgtype = "file";
-        print(extension);
-        fileName = path.split('/').last;
-
-        isfileload = true;
-        print("okkkkkkkkkkkk");
-
-        // widget.onimgfileChanged(base64Image);
-      });
-    } else {
-      // User canceled the picker
-    }
-  }
-
-  XFile? imgfile;
-  final ImagePicker _picker = ImagePicker();
-  _imgFromGallery() async {
-    XFile? img =
-        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 65);
-
-    if (img != null) {
-      setState(() {
-        imgfile = img;
-        sendfile = File(imgfile!.path);
-        final path = imgfile!.path;
-        print(path);
-        final extension = p.extension(path);
-        fileExtesnsion = extension;
-        mesgtype = "img";
-        print(extension);
-        fileName = path.split('/').last;
-        isfileload = true;
-        isimg = true;
-        print("okkkkkkkkkkkk");
-
-        // widget.onimgfileChanged(base64Image);
-      });
-    }
-  }
-
-  void _showPicker(context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Container(
-              child: Wrap(
-                children: <Widget>[
-                  ListTile(
-                      leading: const Icon(Icons.photo_library_outlined),
-                      title: const Text('Gallery'),
-                      onTap: () {
-                        _imgFromGallery();
-                        Navigator.of(context).pop();
-                      }),
-                  ListTile(
-                    leading: const Icon(Icons.camera_alt_outlined),
-                    title: const Text('Camera'),
-                    onTap: () {
-                      _imgFromCamera();
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
-  _imgFromCamera() async {
-    XFile? img =
-        await _picker.pickImage(source: ImageSource.camera, imageQuality: 50);
-
-    if (img != null) {
-      setState(() {
-        imgfile = img;
-        sendfile = File(imgfile!.path);
-        final path = imgfile!.path;
-        print(path);
-        final extension = p.extension(path);
-        fileExtesnsion = extension;
-        mesgtype = "img";
-        print(extension);
-        fileName = path.split('/').last;
-        isfileload = true;
-        isimg = true;
-        print("okkkkkkkkkkkk");
-
-        // widget.onimgfileChanged(base64Image);
-      });
-    }
-  }
-
-  setscroll() {
-    if (_scrollController.hasClients) {
-      print("has------------------");
-      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-    }
-  }
-}
-
-class PathModel {
-  final String id;
-  final String path;
-
-  PathModel({required this.id, required this.path});
-}

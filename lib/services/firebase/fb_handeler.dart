@@ -117,6 +117,17 @@ class FbHandeler {
     return model;
   }
 
+  static Future<UserModel> getUserid(String id) async {
+    String uid = id;
+    const String collectionpath = "/users/";
+    UserModel model;
+
+    DocumentSnapshot documentSnapshot =
+        await firestoreInstance.collection(collectionpath).doc(uid).get();
+    model = UserModel.fromMap(documentSnapshot.data() as Map<String, dynamic>);
+    return model;
+  }
+
   //commiunity
   static Future<List<PostModel>> getallPost() async {
     List<PostModel> enlist = [];

@@ -1,26 +1,20 @@
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:agriapp/components/already_have_an_account_acheck.dart';
 import 'package:agriapp/components/or_divider.dart';
 import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/usermodel.dart';
-import 'package:agriapp/screens/auth/load_userdata.dart';
 import 'package:agriapp/screens/auth/sign_in.dart';
 import 'package:agriapp/services/auth/signin_mannager.dart';
 import 'package:agriapp/services/date_time/date.dart';
 import 'package:agriapp/services/firebase/fb_handeler.dart';
 import 'package:agriapp/services/upload/file_upload.dart';
-
 import 'package:agriapp/services/validator/validate_handeler.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lottie/lottie.dart';
-
 import 'check_signIn.dart';
 
 class SignUpExpert extends StatefulWidget {
@@ -133,13 +127,13 @@ class _SignUpExpertState extends State<SignUpExpert> {
                                           _imgFromGallery();
                                         },
                                         elevation: 2.0,
-                                        fillColor: Color(0xFFF5F6F9),
-                                        child: Icon(
+                                        fillColor: const Color(0xFFF5F6F9),
+                                        padding: const EdgeInsets.all(5.0),
+                                        shape: const CircleBorder(),
+                                        child: const Icon(
                                           Icons.camera_alt_outlined,
                                           color: Colors.green,
                                         ),
-                                        padding: EdgeInsets.all(15.0),
-                                        shape: CircleBorder(),
                                       )),
                                 ],
                               ),

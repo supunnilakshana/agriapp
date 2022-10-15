@@ -1,5 +1,6 @@
 import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/models/usermodel.dart';
+import 'package:agriapp/screens/chat/components/chatList.dart';
 import 'package:agriapp/screens/home/comi_tab/post_tab.dart';
 import 'package:agriapp/screens/home/dash_tab/dashboard_tab.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,11 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var userModel = Provider.of<UserModel>(context);
-    List<Widget> _widgetOptions = [
-      DashTab(),
-      const Text("data"),
-      const PostTab()
-    ];
+    List<Widget> _widgetOptions = [DashTab(), ChatList(), const PostTab()];
     return WillPopScope(
       onWillPop: () {
         final timegap = DateTime.now().difference(pre_backpress);

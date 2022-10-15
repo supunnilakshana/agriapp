@@ -2,6 +2,7 @@ import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/usermodel.dart';
 import 'package:agriapp/screens/home/dash_tab/drawer.dart';
+import 'package:agriapp/screens/home/dash_tab/news_web_view.dart';
 import 'package:agriapp/screens/user_list/user_list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,8 @@ class DashTab extends StatelessWidget {
               _scaffoldKey.currentState!.openDrawer();
             },
             icon: Icon(
-              Icons.menu_open_sharp,
-              color: Colors.white,
+              Icons.menu_rounded,
+              color: Colors.white.withOpacity(.8),
               size: size.width * 0.1,
             ),
           )),
@@ -300,10 +301,16 @@ class DashTab extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: HomeItem(
-                  size: size,
-                  img: "assets/icons/news.png",
-                  titel: "News",
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => NewsWebView()));
+                  },
+                  child: HomeItem(
+                    size: size,
+                    img: "assets/icons/news.png",
+                    titel: "News",
+                  ),
                 ),
               )
             ],

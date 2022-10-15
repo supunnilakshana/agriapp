@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -132,13 +134,13 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                           _imgFromGallery();
                                         },
                                         elevation: 2.0,
-                                        fillColor: Color(0xFFF5F6F9),
-                                        child: Icon(
+                                        fillColor: const Color(0xFFF5F6F9),
+                                        child: const Icon(
                                           Icons.camera_alt_outlined,
                                           color: Colors.green,
                                         ),
-                                        padding: EdgeInsets.all(15.0),
-                                        shape: CircleBorder(),
+                                        padding: const EdgeInsets.all(5.0),
+                                        shape: const CircleBorder(),
                                       )),
                                 ],
                               ),
