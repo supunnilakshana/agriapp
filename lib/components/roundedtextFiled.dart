@@ -91,7 +91,7 @@ class _RoundedInputWithControllState extends State<RoundedInputWithControll> {
         style: TextStyle(color: Colors.black.withOpacity(0.9)),
         decoration: InputDecoration(
             hintStyle: TextStyle(color: Colors.black.withOpacity(0.9)),
-            icon: Icon(widget.icon, color: Colors.white),
+            icon: Icon(widget.icon, color: Colors.black.withOpacity(0.9)),
             hintText: widget.hintText,
             border: InputBorder.none),
       ),

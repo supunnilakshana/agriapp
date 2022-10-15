@@ -91,6 +91,9 @@ class MenuDrawer extends StatelessWidget {
                   PopupDialog.showPopuplogout(
                       context, "Signout", "Do you want to signout ? ",
                       () async {
+                    context.read<UserModel>().updateData(UserModel(
+                        name: "", email: "", phone: "", role: "-1", date: ""));
+
                     await SigninManager().signOut();
 
                     // ignore: use_build_context_synchronously

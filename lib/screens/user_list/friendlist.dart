@@ -10,6 +10,8 @@ import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:lottie/lottie.dart';
 
+import '../Chat/components/singel_chat.dart';
+
 class Friendlist extends StatefulWidget {
   final String role;
   const Friendlist({
@@ -135,7 +137,7 @@ class _FriendlistState extends State<Friendlist> {
                                     subtitle: Row(children: [
                                       Expanded(
                                         child: Text(
-                                            "${getpossition(data[indext].role)}",
+                                            getpossition(data[indext].role),
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                             softWrap: false,
@@ -170,19 +172,22 @@ class _FriendlistState extends State<Friendlist> {
                                         ),
                                         IconButton(
                                           onPressed: () async {
-                                            // reloaddata();
-                                            // Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //         builder: (context) =>
-                                            //             SingelChatScreen(
-                                            //               rid: data[indext].id,
-                                            //               email: data[indext]
-                                            //                   .email,
-                                            //               name:
-                                            //                   data[indext].name,
-                                            //             )));
-                                            // print(data[indext].id);
+                                            reloaddata();
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SingelChatScreen(
+                                                          rid:
+                                                              data[indext].uid!,
+                                                          email: data[indext]
+                                                              .email,
+                                                          name:
+                                                              data[indext].name,
+                                                          userModel:
+                                                              data[indext],
+                                                        )));
+                                            print(data[indext].uid);
                                           },
                                           icon: Icon(Icons.message_rounded),
                                           color:

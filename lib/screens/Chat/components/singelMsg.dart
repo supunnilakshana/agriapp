@@ -40,7 +40,7 @@ class _SingelMsgState extends State<SingelMsg> {
               Container(
                 decoration: BoxDecoration(
                     color: widget.mcolor,
-                    borderRadius: BorderRadius.circular(28)),
+                    borderRadius: BorderRadius.circular(12)),
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Text(
@@ -48,7 +48,7 @@ class _SingelMsgState extends State<SingelMsg> {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 100,
                     style: TextStyle(
-                      color: kBasefontColor,
+                      color: kBasefontColor.withOpacity(0.7),
                       fontSize: size.width * 0.04,
                     ),
                   ),

@@ -93,7 +93,7 @@ class _SingelImgItemState extends State<SingelImgItem> {
                 ),
                 title: Text(widget.msgModel.fname),
                 trailing: isdownloading
-                    ? Lottie.asset("assets/animation/loadingwhitec.json",
+                    ? Lottie.asset("assets/animations/downloading.json",
                         width: size.width * 0.08)
                     : GestureDetector(
                         onTap: () async {

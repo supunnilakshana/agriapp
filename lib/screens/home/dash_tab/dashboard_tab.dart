@@ -253,7 +253,7 @@ class DashTab extends StatelessWidget {
                   ),
                 )
               : Container(),
-          userModel.role != "1"
+          userModel.role != "2"
               ? Padding(
                   padding: const EdgeInsets.only(
                       left: 10, right: 10, bottom: 3, top: 3),
