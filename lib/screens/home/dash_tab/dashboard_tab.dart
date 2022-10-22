@@ -2,9 +2,11 @@ import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/usermodel.dart';
 import 'package:agriapp/screens/home/dash_tab/drawer.dart';
+import 'package:agriapp/screens/home/dash_tab/edash/dashboard.dart';
 import 'package:agriapp/screens/home/dash_tab/news_web_view.dart';
 import 'package:agriapp/screens/home/dash_tab/profile_page.dart';
 import 'package:agriapp/screens/home/dash_tab/videos_screen.dart';
+import 'package:agriapp/screens/home/home_screen.dart';
 import 'package:agriapp/screens/user_list/user_list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -302,35 +304,76 @@ class DashTab extends StatelessWidget {
                   ),
                 )
               : Container(),
-          Row(
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => VideoScreen()));
-                  },
-                  child: HomeItem(
-                    img: "assets/icons/videos.png",
-                    size: size,
-                    titel: "Videos",
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                int.parse(userModel.role) == UserRole.expert.index
+                    ? Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Edashbord()));
+                          },
+                          child: HomeItem(
+                            img: "assets/icons/dashboard.png",
+                            size: size,
+                            titel: "Dasboard",
+                          ),
+                        ),
+                      )
+                    : Container(),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeScreen(
+                                    index: 2,
+                                  )));
+                    },
+                    child: HomeItem(
+                      img: "assets/icons/community.png",
+                      size: size,
+                      titel: "Community",
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => NewsWebView()));
-                  },
-                  child: HomeItem(
-                    size: size,
-                    img: "assets/icons/news.png",
-                    titel: "News",
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => VideoScreen()));
+                    },
+                    child: HomeItem(
+                      img: "assets/icons/videos.png",
+                      size: size,
+                      titel: "Videos",
+                    ),
                   ),
                 ),
-              )
-            ],
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NewsWebView()));
+                    },
+                    child: HomeItem(
+                      size: size,
+                      img: "assets/icons/news.png",
+                      titel: "News",
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ],
       )),
@@ -391,9 +434,9 @@ class HomeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        left: size.width * 0.05,
-        right: size.width * 0.05,
-      ),
+          // left: size.width * 0.05,
+          // right: size.width * 0.05,
+          ),
       child: Card(
         color: Colors.white.withOpacity(0.8),
         shape: RoundedRectangleBorder(

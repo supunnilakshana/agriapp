@@ -30,7 +30,7 @@ class StartState extends State<SplashScreen> {
   }
 
   startTimer() async {
-    var duration = Duration(seconds: 2);
+    var duration = Duration(seconds: 3);
 
     return new Timer(duration, route);
   }
@@ -49,22 +49,26 @@ class StartState extends State<SplashScreen> {
       height: size.height,
       decoration: BoxDecoration(color: kPrimaryColorlight),
       child: Column(
-        children: <Widget>[
+        children: [
           SizedBox(
             height: size.height * 0.2,
           ),
           Padding(
-              padding: EdgeInsets.all(size.width * 0.1),
+              padding: EdgeInsets.only(
+                  top: size.width * 0.1,
+                  left: size.width * 0.1,
+                  right: size.width * 0.1),
               child: Image.asset("assets/icons/app_icon.png")),
+          CircularProgressIndicator(color: kPrimaryColordark),
           SizedBox(
-            height: size.height * 0.2,
+            height: size.height * 0.22,
           ),
           Text(
-            "Agrii App",
+            "Copyright 2022 © Smart Agri",
             style: TextStyle(
               fontSize: size.width * 0.04,
               fontWeight: FontWeight.w500,
-              color: Colors.black54,
+              color: Colors.black.withOpacity(0.7),
             ),
           ),
         ],
