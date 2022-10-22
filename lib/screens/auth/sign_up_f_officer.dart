@@ -38,6 +38,8 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
   String _mobile = "";
   String _city = "";
   String _addr = "";
+  String _emno = "";
+  final TextEditingController _emnocon = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _uncon = TextEditingController();
@@ -59,12 +61,7 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
           key: _formKey,
           child: Container(
             width: double.infinity,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-              Color.fromARGB(255, 8, 235, 65),
-              Color.fromARGB(255, 18, 157, 59),
-              Color.fromARGB(255, 7, 175, 102)
-            ])),
+            decoration: const BoxDecoration(gradient: kGradientGreen),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -188,27 +185,6 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                             bottom: BorderSide(
                                                 color: Colors.grey.shade200))),
                                     child: TextFormField(
-                                      controller: _citycon,
-                                      onChanged: (value) {
-                                        _city = value;
-                                      },
-                                      validator: (value) {
-                                        return Validater.genaralvalid(value!);
-                                      },
-                                      decoration: const InputDecoration(
-                                          hintText: "City",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey.shade200))),
-                                    child: TextFormField(
                                       controller: _uncon,
                                       onChanged: (value) {
                                         _email = value;
@@ -251,6 +227,48 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                             bottom: BorderSide(
                                                 color: Colors.grey.shade200))),
                                     child: TextFormField(
+                                      controller: _emnocon,
+                                      onChanged: (value) {
+                                        _emno = value;
+                                      },
+                                      validator: (value) {
+                                        return Validater.genaralvalid(value!);
+                                      },
+                                      decoration: const InputDecoration(
+                                          hintText: "Employement No",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                          border: InputBorder.none),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                color: Colors.grey.shade200))),
+                                    child: TextFormField(
+                                      controller: _citycon,
+                                      onChanged: (value) {
+                                        _city = value;
+                                      },
+                                      validator: (value) {
+                                        return Validater.genaralvalid(value!);
+                                      },
+                                      decoration: const InputDecoration(
+                                          hintText: "Rsponsible Area",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                          border: InputBorder.none),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                color: Colors.grey.shade200))),
+                                    child: TextFormField(
                                       maxLines: 2,
                                       controller: _addrcon,
                                       onChanged: (value) {
@@ -260,7 +278,7 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Address",
+                                          hintText: "Employment place address",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -274,6 +292,7 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                                 color: Colors.grey.shade200))),
                                     child: TextFormField(
                                       controller: _pwcon,
+                                      obscureText: true,
                                       onChanged: (value) {
                                         _passWord = value;
                                       },
@@ -325,6 +344,7 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                         email: _uncon.text,
                                         phone: _mobilecon.text,
                                         area: _citycon.text,
+                                        emno: _emnocon.text,
                                         imageurl: iurl,
                                         address: _addrcon.text,
                                         role:

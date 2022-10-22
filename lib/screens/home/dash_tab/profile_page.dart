@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -21,20 +23,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
-class SignUpFamer extends StatefulWidget {
-  const SignUpFamer({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<SignUpFamer> createState() => _SignUpFamerState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _SignUpFamerState extends State<SignUpFamer> {
+class _ProfilePageState extends State<ProfilePage> {
   String _email = "";
   String _passWord = "";
   String _name = "";
   String _mobile = "";
   String _city = "";
+  String _addr = "";
+  String _emno = "";
+  final TextEditingController _emnocon = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _uncon = TextEditingController();
@@ -42,11 +48,22 @@ class _SignUpFamerState extends State<SignUpFamer> {
   final TextEditingController _namecon = TextEditingController();
   final TextEditingController _mobilecon = TextEditingController();
   final TextEditingController _citycon = TextEditingController();
+  final TextEditingController _addrcon = TextEditingController();
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final user = FirebaseAuth.instance.currentUser;
+    var userModel = Provider.of<UserModel>(context);
+    _namecon.text = userModel.name;
+    _uncon.text = userModel.email;
+    _addrcon.text = userModel.address;
+    _emnocon.text = userModel.emno;
+    _citycon.text = userModel.area;
+    _mobilecon.text = userModel.phone;
+
     return Scaffold(
       key: _scaffoldKey,
       body: GestureDetector(
@@ -59,22 +76,82 @@ class _SignUpFamerState extends State<SignUpFamer> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: size.height * 0.05),
+                SizedBox(height: size.height * 0.02),
+                const BackButton(
+                  color: Colors.white,
+                ),
                 Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.only(
+                    left: 30,
+                    right: 30,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Sign Up",
-                        style: TextStyle(color: Colors.white, fontSize: 40),
+                        "My Profile",
+                        style: TextStyle(color: Colors.white, fontSize: 32),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text(
-                        "Hello Farmer!! ",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: size.width * 0.28,
+                            width: size.height * 0.15,
+                            child: Stack(
+                              clipBehavior: Clip.none,
+                              fit: StackFit.expand,
+                              children: [
+                                isimgload
+                                    ? CircleAvatar(
+                                        radius: size.width * 0.20,
+                                        backgroundImage:
+                                            FileImage(File(_image!.path)),
+                                      )
+                                    : CircleAvatar(
+                                        backgroundColor:
+                                            Colors.lightGreen.shade200,
+                                        radius: size.width * 0.20,
+                                        backgroundImage:
+                                            NetworkImage(userModel.imageurl),
+                                      ),
+                                Positioned(
+                                    bottom: 0,
+                                    right: -25,
+                                    child: RawMaterialButton(
+                                      onPressed: () async {
+                                        FocusScope.of(context).unfocus();
+                                        // _imgFromGallery();
+                                      },
+                                      elevation: 2.0,
+                                      fillColor: const Color(0xFFF5F6F9),
+                                      child: const Icon(
+                                        Icons.camera_alt_outlined,
+                                        color: Colors.green,
+                                      ),
+                                      padding: const EdgeInsets.all(5.0),
+                                      shape: const CircleBorder(),
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${userModel.name} (${getpossition(userModel.role)})",
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 23),
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(height: size.height * 0.01),
                     ],
@@ -98,44 +175,6 @@ class _SignUpFamerState extends State<SignUpFamer> {
                             const SizedBox(
                               height: 5,
                             ),
-                            SizedBox(
-                              height: size.width * 0.25,
-                              width: size.height * 0.12,
-                              child: Stack(
-                                clipBehavior: Clip.none,
-                                fit: StackFit.expand,
-                                children: [
-                                  isimgload
-                                      ? CircleAvatar(
-                                          radius: size.width * 0.17,
-                                          backgroundImage:
-                                              FileImage(File(_image!.path)),
-                                        )
-                                      : CircleAvatar(
-                                          radius: size.width * 0.17,
-                                          backgroundImage: const AssetImage(
-                                              "assets/icons/farmer.png"),
-                                        ),
-                                  Positioned(
-                                      bottom: 0,
-                                      right: -25,
-                                      child: RawMaterialButton(
-                                        onPressed: () async {
-                                          FocusScope.of(context).unfocus();
-                                          _imgFromGallery();
-                                        },
-                                        elevation: 2.0,
-                                        fillColor: const Color(0xFFF5F6F9),
-                                        padding: const EdgeInsets.all(5.0),
-                                        shape: const CircleBorder(),
-                                        child: const Icon(
-                                          Icons.camera_alt_outlined,
-                                          color: Colors.green,
-                                        ),
-                                      )),
-                                ],
-                              ),
-                            ),
                             const SizedBox(
                               height: 10,
                             ),
@@ -158,6 +197,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                             bottom: BorderSide(
                                                 color: Colors.grey.shade200))),
                                     child: TextFormField(
+                                      enabled: false,
                                       controller: _namecon,
                                       onChanged: (value) {
                                         _name = value;
@@ -166,7 +206,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Name",
+                                          labelText: "Name",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -179,27 +219,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                             bottom: BorderSide(
                                                 color: Colors.grey.shade200))),
                                     child: TextFormField(
-                                      controller: _citycon,
-                                      onChanged: (value) {
-                                        _city = value;
-                                      },
-                                      validator: (value) {
-                                        return Validater.genaralvalid(value!);
-                                      },
-                                      decoration: const InputDecoration(
-                                          hintText: "City",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey.shade200))),
-                                    child: TextFormField(
+                                      enabled: false,
                                       controller: _uncon,
                                       onChanged: (value) {
                                         _email = value;
@@ -208,7 +228,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                         return Validater.vaildemail(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Email",
+                                          labelText: "Email",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -221,6 +241,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                             bottom: BorderSide(
                                                 color: Colors.grey.shade200))),
                                     child: TextFormField(
+                                      enabled: false,
                                       controller: _mobilecon,
                                       onChanged: (value) {
                                         _mobile = value;
@@ -229,12 +250,93 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                         return Validater.vaildmobile(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Mobile No",
+                                          labelText: "Mobile No",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
                                     ),
                                   ),
+                                  int.parse(userModel.role) !=
+                                          UserRole.farmer.index
+                                      ? Container(
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                              border: Border(
+                                                  bottom: BorderSide(
+                                                      color: Colors
+                                                          .grey.shade200))),
+                                          child: TextFormField(
+                                            enabled: false,
+                                            controller: _emnocon,
+                                            onChanged: (value) {
+                                              _emno = value;
+                                            },
+                                            validator: (value) {
+                                              return Validater.genaralvalid(
+                                                  value!);
+                                            },
+                                            decoration: const InputDecoration(
+                                                labelText: "Employement No",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                                border: InputBorder.none),
+                                          ),
+                                        )
+                                      : Container(),
+                                  int.parse(userModel.role) ==
+                                          UserRole.fofficer.index
+                                      ? Container(
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                              border: Border(
+                                                  bottom: BorderSide(
+                                                      color: Colors
+                                                          .grey.shade200))),
+                                          child: TextFormField(
+                                            enabled: false,
+                                            controller: _citycon,
+                                            onChanged: (value) {
+                                              _city = value;
+                                            },
+                                            validator: (value) {
+                                              return Validater.genaralvalid(
+                                                  value!);
+                                            },
+                                            decoration: const InputDecoration(
+                                                labelText: "Responsible Area",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                                border: InputBorder.none),
+                                          ),
+                                        )
+                                      : Container(),
+                                  int.parse(userModel.role) ==
+                                          UserRole.expert.index
+                                      ? Container(
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                              border: Border(
+                                                  bottom: BorderSide(
+                                                      color: Colors
+                                                          .grey.shade200))),
+                                          child: TextFormField(
+                                            enabled: false,
+                                            controller: _citycon,
+                                            onChanged: (value) {
+                                              _city = value;
+                                            },
+                                            validator: (value) {
+                                              return Validater.genaralvalid(
+                                                  value!);
+                                            },
+                                            decoration: const InputDecoration(
+                                                labelText: "Specailized Area",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                                border: InputBorder.none),
+                                          ),
+                                        )
+                                      : Container(),
                                   Container(
                                     padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
@@ -242,16 +344,17 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                             bottom: BorderSide(
                                                 color: Colors.grey.shade200))),
                                     child: TextFormField(
-                                      controller: _pwcon,
+                                      enabled: false,
+                                      maxLines: 2,
+                                      controller: _addrcon,
                                       onChanged: (value) {
-                                        _passWord = value;
+                                        _addr = value;
                                       },
                                       validator: (value) {
-                                        return Validater.signupPassword(value!);
+                                        return Validater.genaralvalid(value!);
                                       },
-                                      obscureText: true,
                                       decoration: const InputDecoration(
-                                          hintText: "Password",
+                                          labelText: "Employment place address",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -262,109 +365,6 @@ class _SignUpFamerState extends State<SignUpFamer> {
                             ),
                             const SizedBox(
                               height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  print("press login");
-                                  _scaffoldKey.currentState!
-                                      // ignore: deprecated_member_use
-                                      .showSnackBar(SnackBar(
-                                    duration: const Duration(seconds: 4),
-                                    backgroundColor: kPrimaryColordark,
-                                    content: Row(
-                                      children: const <Widget>[
-                                        CircularProgressIndicator(),
-                                        Text("Registering...")
-                                      ],
-                                    ),
-                                  ));
-                                  print(_email.trim());
-                                  print(_passWord);
-
-                                  int r = await SigninManager()
-                                      .signUp(_email.trim(), _passWord);
-
-                                  if (r == resok) {
-                                    String iurl = await _imageUpload();
-                                    final user =
-                                        FirebaseAuth.instance.currentUser;
-                                    final umodel = UserModel(
-                                        uid: user!.uid,
-                                        name: _namecon.text,
-                                        email: _uncon.text,
-                                        phone: _mobilecon.text,
-                                        area: _citycon.text,
-                                        imageurl: iurl,
-                                        role: UserRole.farmer.index.toString(),
-                                        date: DateTime.now().toIso8601String());
-                                    await FbHandeler.createDocManual(
-                                        umodel.toMap(),
-                                        CollectionPath.userpath,
-                                        user.uid);
-                                    // ignore: use_build_context_synchronously
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return const CheckSignIn();
-                                        },
-                                      ),
-                                    );
-                                    print(r);
-                                  } else if (r == resfail) {
-                                    Get.snackbar(
-                                      "SignUp failed",
-                                      "Please enter the valid email or password",
-                                      icon: const Icon(Icons.error,
-                                          color: Colors.white),
-                                      snackPosition: SnackPosition.BOTTOM,
-                                    );
-                                  } else if (r == 2) {
-                                    Get.snackbar(
-                                      "SignUp failed",
-                                      "Please enter the valid email or password",
-                                      colorText: Colors.red,
-                                      backgroundColor: Colors.yellow,
-                                      icon: const Icon(Icons.error,
-                                          color: Colors.black),
-                                      snackPosition: SnackPosition.TOP,
-                                    );
-                                  }
-                                } else {
-                                  print("Not Complete");
-                                }
-                              },
-                              child: Container(
-                                height: 50,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 50),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: kPrimaryColordark),
-                                child: const Center(
-                                  child: Text(
-                                    "Sign Up",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            OrDivider(),
-                            AlreadyHaveAnAccountCheck(
-                              login: false,
-                              press: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const SignIn();
-                                    },
-                                  ),
-                                );
-                              },
                             ),
                             const SizedBox(
                               height: 50,

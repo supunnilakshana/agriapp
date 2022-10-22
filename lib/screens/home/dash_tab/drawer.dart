@@ -3,7 +3,10 @@ import 'package:agriapp/components/tots.dart';
 import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/usermodel.dart';
+import 'package:agriapp/screens/auth/reset_password/reset_password.dart';
 import 'package:agriapp/screens/auth/sign_in.dart';
+import 'package:agriapp/screens/home/dash_tab/profile_page.dart';
+import 'package:agriapp/screens/language/select_lang.dart';
 import 'package:agriapp/services/auth/signin_mannager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -35,30 +38,41 @@ class MenuDrawer extends StatelessWidget {
                   backgroundImage: NetworkImage(
                       userModel.imageurl != "" ? userModel.imageurl : guserimg),
                 )),
+
             Card(
               child: ListTile(
                 leading: const Icon(
-                  Icons.account_circle,
+                  Icons.person_outlined,
                   color: kPrimaryColordark,
                 ),
-                title: const Text('Reset Password'),
-                onTap: () {},
+                title: const Text('My Profile'),
+                onTap: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfilePage()));
+                },
+              ),
+            ),
+            Card(
+              child: ListTile(
+                leading: const Icon(
+                  Icons.password_outlined,
+                  color: kPrimaryColordark,
+                ),
+                title: const Text('Change Password'),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ResetPassword()));
+                },
               ),
             ),
             Card(
               child: ListTile(
                 leading: const Icon(
                   Icons.web,
-                  color: kPrimaryColordark,
-                ),
-                title: const Text('Visit our Website'),
-                onTap: () async {},
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(
-                  Icons.people,
                   color: kPrimaryColordark,
                 ),
                 title: const Text('About Us'),
@@ -71,14 +85,36 @@ class MenuDrawer extends StatelessWidget {
             Card(
               child: ListTile(
                 leading: const Icon(
-                  Icons.settings,
+                  Icons.contact_page_outlined,
                   color: kPrimaryColordark,
                 ),
-                title: const Text('App Version'),
-                onTap: () {
-                  Customtost.commontost("Version 1.0.0", Colors.amber);
-                },
+                title: const Text('Contact Us'),
+                onTap: () async {},
               ),
+            ),
+            Card(
+              child: ListTile(
+                leading: const Icon(
+                  Icons.book_online_outlined,
+                  color: kPrimaryColordark,
+                ),
+                title: const Text('Terms & Conditions'),
+                onTap: () async {},
+              ),
+            ),
+            Card(
+              child: ListTile(
+                  leading: const Icon(
+                    Icons.language_rounded,
+                    color: kPrimaryColordark,
+                  ),
+                  title: const Text('Change Language'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SelectLang()));
+                  }),
             ),
             Card(
               child: ListTile(
@@ -91,8 +127,8 @@ class MenuDrawer extends StatelessWidget {
                   PopupDialog.showPopuplogout(
                       context, "Signout", "Do you want to signout ? ",
                       () async {
-                    context.read<UserModel>().updateData(UserModel(
-                        name: "", email: "", phone: "", role: "-1", date: ""));
+                    // context.read<UserModel>().updateData(UserModel(
+                    //     name: "", email: "", phone: "", role: "-1", date: ""));
 
                     await SigninManager().signOut();
 

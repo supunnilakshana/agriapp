@@ -31,6 +31,7 @@ class _SignUpExpertState extends State<SignUpExpert> {
   String _mobile = "";
   String _city = "";
   String _addr = "";
+  String _emno = "";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _uncon = TextEditingController();
@@ -39,6 +40,7 @@ class _SignUpExpertState extends State<SignUpExpert> {
   final TextEditingController _mobilecon = TextEditingController();
   final TextEditingController _citycon = TextEditingController();
   final TextEditingController _addrcon = TextEditingController();
+  final TextEditingController _emnocon = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -52,12 +54,7 @@ class _SignUpExpertState extends State<SignUpExpert> {
           key: _formKey,
           child: Container(
             width: double.infinity,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-              Color.fromARGB(255, 8, 235, 65),
-              Color.fromARGB(255, 18, 157, 59),
-              Color.fromARGB(255, 7, 175, 102)
-            ])),
+            decoration: const BoxDecoration(gradient: kGradientGreen),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -223,16 +220,15 @@ class _SignUpExpertState extends State<SignUpExpert> {
                                             bottom: BorderSide(
                                                 color: Colors.grey.shade200))),
                                     child: TextFormField(
-                                      maxLines: 2,
-                                      controller: _addrcon,
+                                      controller: _citycon,
                                       onChanged: (value) {
-                                        _addr = value;
+                                        _city = value;
                                       },
                                       validator: (value) {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Address",
+                                          hintText: "Speialized Area",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -245,6 +241,50 @@ class _SignUpExpertState extends State<SignUpExpert> {
                                             bottom: BorderSide(
                                                 color: Colors.grey.shade200))),
                                     child: TextFormField(
+                                      controller: _emnocon,
+                                      onChanged: (value) {
+                                        _emno = value;
+                                      },
+                                      validator: (value) {
+                                        return Validater.genaralvalid(value!);
+                                      },
+                                      decoration: const InputDecoration(
+                                          hintText: "Employement No",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                          border: InputBorder.none),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                color: Colors.grey.shade200))),
+                                    child: TextFormField(
+                                      maxLines: 2,
+                                      controller: _addrcon,
+                                      onChanged: (value) {
+                                        _addr = value;
+                                      },
+                                      validator: (value) {
+                                        return Validater.genaralvalid(value!);
+                                      },
+                                      decoration: const InputDecoration(
+                                          hintText: "Employment place address",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                          border: InputBorder.none),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                color: Colors.grey.shade200))),
+                                    child: TextFormField(
+                                      obscureText: true,
                                       controller: _pwcon,
                                       onChanged: (value) {
                                         _passWord = value;
@@ -298,6 +338,7 @@ class _SignUpExpertState extends State<SignUpExpert> {
                                         phone: _mobilecon.text,
                                         imageurl: iurl,
                                         address: _addrcon.text,
+                                        emno: _emnocon.text,
                                         role: UserRole.expert.index.toString(),
                                         date: DateTime.now().toIso8601String());
                                     await FbHandeler.createDocManual(

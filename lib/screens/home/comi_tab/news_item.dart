@@ -1,5 +1,6 @@
 import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/postmodel.dart';
+import 'package:agriapp/screens/home/comi_tab/comment.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
@@ -187,8 +188,17 @@ class _NewsItemState extends State<NewsItem> {
                                 },
                               ),
                             ),
-                            LineIcon.comments(
-                                color: Colors.black.withOpacity(0.9)),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            CommentScreen(name: "test")));
+                              },
+                              child: LineIcon.comments(
+                                  color: Colors.black.withOpacity(0.9)),
+                            ),
                           ],
                         ),
                       ],

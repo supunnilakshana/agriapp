@@ -2,26 +2,27 @@ import 'package:agriapp/components/already_have_an_account_acheck.dart';
 import 'package:agriapp/components/or_divider.dart';
 import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/constants/initdata.dart';
-import 'package:agriapp/screens/auth/fogot_password/forgot_password.dart';
+import 'package:agriapp/screens/auth/fogot_password/choose_fpmethod.dart';
 import 'package:agriapp/screens/auth/load_userdata.dart';
-import 'package:agriapp/screens/auth/check_signIn.dart';
+
 import 'package:agriapp/screens/auth/select_user_screen.dart';
+import 'package:agriapp/screens/auth/sign_in.dart';
 import 'package:agriapp/screens/auth/sign_up_famer.dart';
-import 'package:agriapp/services/auth/signin_mannager.dart';
+
 import 'package:agriapp/services/validator/validate_handeler.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class ChangePassword extends StatefulWidget {
+  const ChangePassword({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<ChangePassword> createState() => _ChangePasswordState();
 }
 
-class _SignInState extends State<SignIn> {
+class _ChangePasswordState extends State<ChangePassword> {
   String _email = "";
   String _passWord = "";
 
@@ -49,21 +50,20 @@ class _SignInState extends State<SignIn> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Sign In",
+                        "Change Password",
                         style: TextStyle(color: Colors.white, fontSize: 40),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
                       const Text(
-                        "Welcome Back",
+                        "Enter new password",
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       SizedBox(height: size.height * 0.01),
                       SizedBox(
                         width: size.width,
-                        child: Lottie.asset(
-                            'assets/animations/famer-animi.json',
+                        child: Lottie.asset('assets/animations/sendpin.json',
                             height: size.height * 0.3),
                       ),
                     ],
@@ -110,33 +110,12 @@ class _SignInState extends State<SignIn> {
                                       onChanged: (value) {
                                         _email = value;
                                       },
-                                      validator: (value) {
-                                        return Validater.vaildemail(value!);
-                                      },
-                                      decoration: const InputDecoration(
-                                          hintText: "Email",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey.shade200))),
-                                    child: TextFormField(
                                       obscureText: true,
-                                      controller: _pwcon,
-                                      onChanged: (value) {
-                                        _passWord = value;
-                                      },
                                       validator: (value) {
-                                        return Validater.signupPassword(value!);
+                                        return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Password",
+                                          hintText: "New Password",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -148,68 +127,20 @@ class _SignInState extends State<SignIn> {
                             const SizedBox(
                               height: 20,
                             ),
-                            GestureDetector(
-                              onTap: (() {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const ForgotPassword();
-                                    },
-                                  ),
-                                );
-                              }),
-                              child: const Text(
-                                "Forgot Password?",
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ),
                             const SizedBox(
                               height: 20,
                             ),
                             GestureDetector(
                               onTap: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  print("press login");
-                                  print(_email.trim());
-                                  print(_passWord);
-                                  int r = await SigninManager()
-                                      .signIn(_email.trim(), _passWord);
-                                  print(r.toString() +
-                                      "------------------------------------------");
-                                  if (r == resok) {
-                                    print("loged");
-                                    // ignore: use_build_context_synchronously
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return const CheckSignIn();
-                                        },
-                                      ),
-                                    );
-                                  } else if (r == resfail) {
-                                    Get.snackbar(
-                                      "Signin failed",
-                                      "Please enter the correct email or password",
-                                      backgroundColor: Colors.red,
-                                      icon: const Icon(Icons.error,
-                                          color: Colors.white),
-                                      snackPosition: SnackPosition.BOTTOM,
-                                    );
-                                  } else if (r == resfail) {
-                                    Get.snackbar(
-                                      "Signin failed",
-                                      "Please enter the correct email or password",
-                                      colorText: Colors.red,
-                                      backgroundColor: Colors.yellow,
-                                      icon: const Icon(Icons.error,
-                                          color: Colors.black),
-                                      snackPosition: SnackPosition.TOP,
-                                    );
-                                  }
-                                } else {
-                                  print("Not Complete");
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return const SignIn();
+                                      },
+                                    ),
+                                  );
                                 }
                               },
                               child: Container(
@@ -221,27 +152,13 @@ class _SignInState extends State<SignIn> {
                                     color: kPrimaryColordark),
                                 child: const Center(
                                   child: Text(
-                                    "Sign In",
+                                    "Update",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ),
-                            ),
-                            OrDivider(),
-                            AlreadyHaveAnAccountCheck(
-                              login: true,
-                              press: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return SelectUserScreen();
-                                    },
-                                  ),
-                                );
-                              },
                             ),
                             const SizedBox(
                               height: 50,

@@ -24,3 +24,8 @@ const kGradientBLueColor = LinearGradient(
     Color.fromARGB(255, 24, 232, 41)
   ],
 );
+const kGradientGreen = LinearGradient(begin: Alignment.topCenter, colors: [
+  Color(0xff268C43),
+  Color(0xff0C8140),
+  Color.fromARGB(255, 36, 100, 53),
+]);

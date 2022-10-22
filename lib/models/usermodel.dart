@@ -4,6 +4,7 @@ class UserModel extends ChangeNotifier {
   String? uid;
   String name;
   String email;
+  String emno;
   String phone;
   String role;
   String area;
@@ -17,6 +18,7 @@ class UserModel extends ChangeNotifier {
     required this.email,
     required this.phone,
     required this.role,
+    this.emno = "",
     this.area = "",
     this.address = "",
     required this.date,
@@ -27,6 +29,7 @@ class UserModel extends ChangeNotifier {
       'uid': uid,
       'name': name,
       'email': email,
+      'emno': emno,
       'phone': phone,
       'role': role,
       'area': area,
@@ -41,6 +44,7 @@ class UserModel extends ChangeNotifier {
       uid: res['uid'],
       name: res['name'],
       email: res['email'],
+      emno: res['emno'] ?? "",
       phone: res['phone'] ?? "",
       role: res['role'],
       area: res['area'] ?? "",

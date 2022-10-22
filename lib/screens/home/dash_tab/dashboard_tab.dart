@@ -3,6 +3,8 @@ import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/usermodel.dart';
 import 'package:agriapp/screens/home/dash_tab/drawer.dart';
 import 'package:agriapp/screens/home/dash_tab/news_web_view.dart';
+import 'package:agriapp/screens/home/dash_tab/profile_page.dart';
+import 'package:agriapp/screens/home/dash_tab/videos_screen.dart';
 import 'package:agriapp/screens/user_list/user_list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -25,14 +27,23 @@ class DashTab extends StatelessWidget {
       backgroundColor: Colors.green.withOpacity(0.2),
       appBar: AppBar(
           actions: [
-            Container(
-                margin: const EdgeInsets.only(top: 2, right: 5),
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: size.width * 0.08,
-                  backgroundImage: NetworkImage(
-                      userModel.imageurl == "" ? guserimg : userModel.imageurl),
-                )),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfilePage()));
+              },
+              child: Container(
+                  margin: const EdgeInsets.only(top: 2, right: 5),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: size.width * 0.08,
+                    backgroundImage: NetworkImage(userModel.imageurl == ""
+                        ? guserimg
+                        : userModel.imageurl),
+                  )),
+            ),
           ],
           iconTheme: const IconThemeData(
             color: Colors.black,
@@ -294,10 +305,16 @@ class DashTab extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: HomeItem(
-                  img: "assets/icons/videos.png",
-                  size: size,
-                  titel: "Videos",
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => VideoScreen()));
+                  },
+                  child: HomeItem(
+                    img: "assets/icons/videos.png",
+                    size: size,
+                    titel: "Videos",
+                  ),
                 ),
               ),
               Expanded(
