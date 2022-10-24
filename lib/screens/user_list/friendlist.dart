@@ -6,6 +6,7 @@ import 'package:agriapp/components/tots.dart';
 import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/usermodel.dart';
+import 'package:agriapp/screens/home/drawer_item/schedule_ap.dart';
 import 'package:agriapp/services/firebase/fb_handeler.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -176,14 +177,17 @@ class _FriendlistState extends State<Friendlist> {
                                       children: [
                                         IconButton(
                                           onPressed: () async {
-                                            PopupDialog.showPopupDilog(
-                                                context,
-                                                "Send calling request",
-                                                "Send calling request to ${data[indext].name}",
-                                                () {
-                                              Customtost.commontost(
-                                                  "Sended", Colors.greenAccent);
-                                            });
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) {
+                                                  return ScheduleAp(
+                                                    userModel: data[indext],
+                                                    val: "1",
+                                                  );
+                                                },
+                                              ),
+                                            );
                                           },
                                           icon: Icon(
                                             Icons.call,
@@ -195,14 +199,17 @@ class _FriendlistState extends State<Friendlist> {
                                         ),
                                         IconButton(
                                           onPressed: () async {
-                                            PopupDialog.showPopupDilog(
-                                                context,
-                                                "Send video calling request",
-                                                "Send video calling request to ${data[indext].name}",
-                                                () {
-                                              Customtost.commontost(
-                                                  "Sended", Colors.greenAccent);
-                                            });
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) {
+                                                  return ScheduleAp(
+                                                    userModel: data[indext],
+                                                    val: "2",
+                                                  );
+                                                },
+                                              ),
+                                            );
                                           },
                                           icon: Icon(
                                             Icons.video_call_rounded,

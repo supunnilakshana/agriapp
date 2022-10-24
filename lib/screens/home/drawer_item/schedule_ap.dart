@@ -29,9 +29,10 @@ import 'package:date_format/date_format.dart';
 import '../../auth/fogot_password/change_password.dart';
 
 class ScheduleAp extends StatefulWidget {
-  const ScheduleAp({Key? key, required this.userModel}) : super(key: key);
+  const ScheduleAp({Key? key, required this.userModel, required this.val})
+      : super(key: key);
   final UserModel userModel;
-
+  final String val;
   @override
   State<ScheduleAp> createState() => _ScheduleApState();
 }
@@ -46,6 +47,18 @@ class _ScheduleApState extends State<ScheduleAp> {
   String _emno = "";
   String date = "Select Date";
   String time = "Select Time";
+  String dropdownValue = 'Choose a time slot';
+
+  final atimeslots = [
+    'Choose a time slot',
+    '8.00 - 9.00',
+    '10.00 - 11.00',
+    '12.00 - 13.00',
+    '15.00 - 16.00',
+    '17.00 - 1.00',
+    '18.00 - 19.00',
+    '20.00 - 21.00',
+  ];
 
   final TextEditingController _emnocon = TextEditingController();
 
@@ -58,6 +71,11 @@ class _ScheduleApState extends State<ScheduleAp> {
   final TextEditingController _addrcon = TextEditingController();
   String _value = "1";
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    _value = widget.val;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,9 +143,6 @@ class _ScheduleApState extends State<ScheduleAp> {
                         padding: const EdgeInsets.only(left: 30, right: 30),
                         child: Column(
                           children: [
-                            const SizedBox(
-                              height: 5,
-                            ),
                             const SizedBox(
                               height: 10,
                             ),
@@ -207,32 +222,49 @@ class _ScheduleApState extends State<ScheduleAp> {
                                       ),
                                       Expanded(
                                         child: Container(
-                                            padding: const EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                                border: Border(
-                                                    top: BorderSide(
-                                                        color: Colors
-                                                            .grey.shade200),
-                                                    bottom: BorderSide(
-                                                        color: Colors
-                                                            .grey.shade200))),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                _selectTime(context);
-                                              },
-                                              child: ListTile(
-                                                  title: Text(
-                                                    time,
-                                                    style: TextStyle(
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                              border: Border(
+                                                  top: BorderSide(
+                                                      color:
+                                                          Colors.grey.shade200),
+                                                  bottom: BorderSide(
+                                                      color: Colors
+                                                          .grey.shade200))),
+                                          child: DropdownButton<String>(
+                                            value: dropdownValue,
+                                            icon: const Icon(
+                                                Icons.arrow_downward),
+                                            elevation: 1,
+                                            style: TextStyle(
+                                                color: kDarkBrownButton,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: size.width * 0.044),
+                                            underline: Container(),
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                dropdownValue = newValue!;
+                                                print(dropdownValue);
+                                              });
+                                            },
+                                            items: atimeslots
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(
+                                                  value,
+                                                  style: TextStyle(
                                                       fontSize:
-                                                          size.width * 0.033,
-                                                    ),
-                                                  ),
-                                                  leading: Icon(
-                                                    Icons.timer_sharp,
-                                                    size: size.width * 0.075,
-                                                  )),
-                                            )),
+                                                          size.width * 0.037,
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.normal),
+                                                ),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -282,28 +314,28 @@ class _ScheduleApState extends State<ScheduleAp> {
                                           border: InputBorder.none),
                                     ),
                                   ),
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey.shade200))),
-                                    child: TextFormField(
-                                      enabled: false,
-                                      controller: _mobilecon,
-                                      onChanged: (value) {
-                                        _mobile = value;
-                                      },
-                                      validator: (value) {
-                                        return Validater.vaildmobile(value!);
-                                      },
-                                      decoration: const InputDecoration(
-                                          labelText: "Mobile No",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
+                                  // Container(
+                                  //   padding: const EdgeInsets.all(10),
+                                  //   decoration: BoxDecoration(
+                                  //       border: Border(
+                                  //           bottom: BorderSide(
+                                  //               color: Colors.grey.shade200))),
+                                  //   child: TextFormField(
+                                  //     enabled: false,
+                                  //     controller: _mobilecon,
+                                  //     onChanged: (value) {
+                                  //       _mobile = value;
+                                  //     },
+                                  //     validator: (value) {
+                                  //       return Validater.vaildmobile(value!);
+                                  //     },
+                                  //     decoration: const InputDecoration(
+                                  //         labelText: "Mobile No",
+                                  //         hintStyle:
+                                  //             TextStyle(color: Colors.grey),
+                                  //         border: InputBorder.none),
+                                  //   ),
+                                  // ),
                                   Container(
                                     padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
@@ -374,15 +406,16 @@ class _ScheduleApState extends State<ScheduleAp> {
     final selected = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(2020),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2035),
     );
-    if (selected != null && selected != selectedDate)
+    if (selected != null && selected != selectedDate) {
       setState(() {
         selectedDate = selected;
         date = "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
         setState(() {});
       });
+    }
   }
 
   Future<Null> _selectTime(BuildContext context) async {
@@ -390,7 +423,7 @@ class _ScheduleApState extends State<ScheduleAp> {
       context: context,
       initialTime: selectedTime,
     );
-    if (picked != null)
+    if (picked != null) {
       setState(() {
         selectedTime = picked;
         _hour = selectedTime.hour.toString();
@@ -406,6 +439,7 @@ class _ScheduleApState extends State<ScheduleAp> {
         print(_time);
         setState(() {});
       });
+    }
   }
 
   String _setTime = "";

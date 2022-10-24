@@ -13,7 +13,7 @@ class PopupDialog {
             title: titel,
             desc: description,
             btnCancelText: "Cancel",
-            btnOkText: "Confirm",
+            btnOkText: "Join",
             btnCancelOnPress: () {},
             btnOkOnPress: () {
               actionFun();

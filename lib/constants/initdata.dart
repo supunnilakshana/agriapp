@@ -21,21 +21,6 @@ class ItemType {
   static const coffe = "c";
 }
 
-final months = [
-  'jan',
-  'feb',
-  'mar',
-  'april',
-  'may',
-  'jun',
-  'july',
-  'aug',
-  'sep',
-  'oct',
-  'nov',
-  'dec'
-];
-
 enum UserRole { farmer, fofficer, expert }
 
 String getpossition(String role) {

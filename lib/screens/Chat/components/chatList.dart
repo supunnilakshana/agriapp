@@ -13,6 +13,8 @@ import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../home/drawer_item/schedule_ap.dart';
+
 class ChatList extends StatefulWidget {
   const ChatList({
     Key? key,
@@ -184,15 +186,18 @@ class _ChatListState extends State<ChatList> {
                                                 children: [
                                                   IconButton(
                                                     onPressed: () async {
-                                                      PopupDialog.showPopupDilog(
-                                                          context,
-                                                          "Send calling request",
-                                                          "Send calling request to ${userModel.name}",
-                                                          () {
-                                                        Customtost.commontost(
-                                                            "Sended",
-                                                            Colors.green);
-                                                      });
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) {
+                                                            return ScheduleAp(
+                                                              userModel:
+                                                                  userModel,
+                                                              val: "1",
+                                                            );
+                                                          },
+                                                        ),
+                                                      );
                                                     },
                                                     icon: Icon(
                                                       Icons.call,
@@ -205,15 +210,37 @@ class _ChatListState extends State<ChatList> {
                                                   ),
                                                   IconButton(
                                                     onPressed: () async {
-                                                      PopupDialog.showPopupDilog(
-                                                          context,
-                                                          "Send video calling request",
-                                                          "Send video calling request to ${userModel.name}",
-                                                          () {
-                                                        Customtost.commontost(
-                                                            "Sended",
-                                                            Colors.green);
-                                                      });
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) {
+                                                            return ScheduleAp(
+                                                              userModel:
+                                                                  userModel,
+                                                              val: "2",
+                                                            );
+                                                          },
+                                                        ),
+                                                      );
+
+                                                      // if (int.parse(userModel
+                                                      //             .role) ==
+                                                      //         UserRole.expert
+                                                      //             .index ||
+                                                      //     int.parse(userModel
+                                                      //             .role) ==
+                                                      //         UserRole.fofficer
+                                                      //             .index) {
+                                                      //   PopupDialog.showPopupDilog(
+                                                      //       context,
+                                                      //       "Send video calling request",
+                                                      //       "Send video calling request to ${userModel.name}",
+                                                      //       () {
+                                                      //     Customtost.commontost(
+                                                      //         "Sended",
+                                                      //         Colors.green);
+                                                      //   });
+                                                      //}
                                                     },
                                                     icon: Icon(
                                                       Icons.video_call_rounded,

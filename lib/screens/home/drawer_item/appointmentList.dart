@@ -5,6 +5,7 @@ import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/usermodel.dart';
 import 'package:agriapp/screens/Chat/components/singel_chat.dart';
+import 'package:agriapp/screens/home/drawer_item/addtimeslot.dart';
 import 'package:agriapp/screens/home/drawer_item/schedule_ap.dart';
 import 'package:agriapp/services/firebase/fb_handeler.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class AppointmentsScreen extends StatefulWidget {
   const AppointmentsScreen({
@@ -34,7 +36,26 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var userModel = Provider.of<UserModel>(context);
     return Scaffold(
+      floatingActionButton:
+          int.parse(userModel.role) == UserRole.expert.index ||
+                  int.parse(userModel.role) == UserRole.fofficer.index
+              ? FloatingActionButton.extended(
+                  backgroundColor: kPrimaryColordark,
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const AddFreeTimeSlots();
+                        },
+                      ),
+                    );
+                  },
+                  label: Text("Add a time slot"))
+              : Container(),
       backgroundColor: Colors.white,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
@@ -176,53 +197,125 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                                                       fontSize:
                                                           size.width * 0.037),
                                                 ),
-                                                subtitle: Row(children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                        getpossition(
-                                                            userModel.role),
-                                                        maxLines: 2,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        softWrap: false,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color: kBasefontColor
-                                                                .withOpacity(
-                                                                    0.7))),
+                                                subtitle: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 2, bottom: 2),
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                top: 0,
+                                                                bottom: 8),
+                                                        child: Row(children: [
+                                                          Expanded(
+                                                            child: Text(
+                                                                "(${getpossition(userModel.role)})",
+                                                                maxLines: 2,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                softWrap: false,
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    color: kBasefontColor
+                                                                        .withOpacity(
+                                                                            0.7))),
+                                                          ),
+                                                        ]),
+                                                      ),
+                                                      Row(children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                              "Time : 8.00 - 9.00",
+                                                              maxLines: 2,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              softWrap: false,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  color: kBasefontColor
+                                                                      .withOpacity(
+                                                                          0.7))),
+                                                        ),
+                                                      ]),
+                                                      Row(children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                              "Date : 20/11/2019",
+                                                              maxLines: 2,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              softWrap: false,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  color: kBasefontColor
+                                                                      .withOpacity(
+                                                                          0.7))),
+                                                        ),
+                                                      ]),
+                                                      Row(children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                              "Type : Video",
+                                                              maxLines: 2,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              softWrap: false,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  color: kBasefontColor
+                                                                      .withOpacity(
+                                                                          0.7))),
+                                                        ),
+                                                      ]),
+                                                      Text(
+                                                          "I'm writing to invite you to a meeting on to discuss green concept. ",
+                                                          maxLines: 4,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          softWrap: false,
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color: kBasefontColor
+                                                                  .withOpacity(
+                                                                      0.7))),
+                                                    ],
                                                   ),
-                                                  Expanded(
-                                                    child: Text("2min ago",
-                                                        maxLines: 1,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        softWrap: false,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color: kBasefontColor
-                                                                .withOpacity(
-                                                                    0.7))),
-                                                  ),
-                                                ]),
+                                                ),
                                                 trailing: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   children: [
                                                     IconButton(
                                                       onPressed: () async {
-                                                        Navigator.push(
+                                                        PopupDialog.showPopupDilog(
                                                             context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    ScheduleAp(
-                                                                        userModel:
-                                                                            userModel)));
+                                                            "Join meeting",
+                                                            "Are you sure join this meeting ?",
+                                                            () {
+                                                          Customtost.commontost(
+                                                              "Sended",
+                                                              Colors.green);
+                                                        });
                                                       },
                                                       icon: Icon(
-                                                        Icons
-                                                            .date_range_outlined,
+                                                        Icons.add_box_outlined,
                                                         color: kBasefontColor
                                                             .withOpacity(0.6),
                                                       ),
@@ -252,7 +345,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                                                         print(userModel.uid);
                                                       },
                                                       icon: const Icon(Icons
-                                                          .message_rounded),
+                                                          .message_outlined),
                                                       color: kBasefontColor
                                                           .withOpacity(0.6),
                                                       iconSize:
