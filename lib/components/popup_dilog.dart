@@ -12,11 +12,14 @@ class PopupDialog {
             animType: AnimType.BOTTOMSLIDE,
             title: titel,
             desc: description,
-            btnCancelText: "Modify",
+            btnCancelText: "Cancel",
             btnOkText: "Confirm",
             btnCancelOnPress: () {},
-            btnOkOnPress: actionFun(),
-            btnCancelColor: kPrimaryColordark)
+            btnOkOnPress: () {
+              actionFun();
+            },
+            btnOkColor: kPrimaryColordark,
+            btnCancelColor: Colors.grey)
         .show();
   }
 

@@ -33,7 +33,7 @@ class _PostTabState extends State<PostTab> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: Colors.green.withOpacity(0.2),
+        backgroundColor: Colors.white,
         floatingActionButton: FloatingActionButton.extended(
             onPressed: () async {
               // Navigator.push(
@@ -51,40 +51,33 @@ class _PostTabState extends State<PostTab> {
                   .then((val) => val ? loaddata() : null);
             },
             label: const Text("Create a post")),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: kPrimaryColordark,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              LineIcon.globe(
+                size: size.width * 0.073,
+                color: Colors.white,
+              ),
+              SizedBox(
+                width: size.width * 0.01,
+              ),
+              Text(
+                "Smart Commiunity",
+                style: TextStyle(
+                    fontSize: size.width * 0.063, color: Colors.white),
+              ),
+            ],
+          ),
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+          ],
+        ),
         body: Container(
           child: Column(
             children: [
-              ClipPath(
-                clipper: WaveClipperOne(),
-                child: Container(
-                  height: size.height * 0.2,
-                  color: kPrimaryColordark,
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: size.height * 0.05, bottom: size.height * 0.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          LineIcon.globe(
-                            size: size.width * 0.09,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: size.width * 0.02,
-                          ),
-                          Text(
-                            "Smart Commiunity",
-                            style: TextStyle(
-                                fontSize: size.width * 0.08,
-                                color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
               Expanded(
                 child: Container(
                   child: FutureBuilder(

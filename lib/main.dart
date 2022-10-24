@@ -4,6 +4,7 @@ import 'package:agriapp/screens/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -22,10 +23,12 @@ class MyApp extends StatelessWidget {
             UserModel(name: "", email: "", phone: "", role: "-1", date: ""),
         builder: (BuildContext context, child) {
           return GetMaterialApp(
-            title: 'Agri app',
+            title: 'Smart Agri',
             theme: ThemeData(
-              primarySwatch: Colors.green,
-            ),
+                primarySwatch: Colors.green,
+                textTheme: GoogleFonts.robotoTextTheme(
+                  Theme.of(context).textTheme,
+                )),
             debugShowCheckedModeBanner: false,
             home: const SplashScreen(),
           );

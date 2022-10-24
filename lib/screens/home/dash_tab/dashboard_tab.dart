@@ -6,6 +6,7 @@ import 'package:agriapp/screens/home/dash_tab/edash/dashboard.dart';
 import 'package:agriapp/screens/home/dash_tab/news_web_view.dart';
 import 'package:agriapp/screens/home/dash_tab/profile_page.dart';
 import 'package:agriapp/screens/home/dash_tab/videos_screen.dart';
+import 'package:agriapp/screens/home/drawer_item/helpscreen.dart';
 import 'package:agriapp/screens/home/home_screen.dart';
 import 'package:agriapp/screens/user_list/user_list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -26,7 +27,7 @@ class DashTab extends StatelessWidget {
     return Scaffold(
       drawer: MenuDrawer(),
       key: _scaffoldKey,
-      backgroundColor: Colors.green.withOpacity(0.2),
+      backgroundColor: Colors.white,
       appBar: AppBar(
           actions: [
             GestureDetector(
@@ -66,11 +67,11 @@ class DashTab extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ClipPath(
-            clipper: WaveClipperOne(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Container(
               height: size.height * 0.17,
-              color: kPrimaryColordark,
+              color: Colors.transparent,
               child: Column(
                 children: [
                   Padding(
@@ -83,7 +84,7 @@ class DashTab extends StatelessWidget {
                         Text(
                           'Hello  ' + userModel.name,
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black87,
                               fontSize: size.width * 0.05,
                               fontWeight: FontWeight.w500),
                         ),
@@ -107,7 +108,7 @@ class DashTab extends StatelessWidget {
                               Text(
                                 '20°C',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black87,
                                     fontSize: size.width * 0.0354,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -125,7 +126,7 @@ class DashTab extends StatelessWidget {
                               Text(
                                 '25 mph',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black87,
                                     fontSize: size.width * 0.0354,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -143,7 +144,7 @@ class DashTab extends StatelessWidget {
                               Text(
                                 '27°C',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black87,
                                     fontSize: size.width * 0.0354,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -161,7 +162,7 @@ class DashTab extends StatelessWidget {
                               Text(
                                 '70 ml',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black87,
                                     fontSize: size.width * 0.0354,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -176,7 +177,7 @@ class DashTab extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(left: 8, right: 8, bottom: 4),
             child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(55.0)),
@@ -305,7 +306,7 @@ class DashTab extends StatelessWidget {
                 )
               : Container(),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(5.0),
             child: Row(
               children: [
                 int.parse(userModel.role) == UserRole.expert.index
@@ -320,7 +321,7 @@ class DashTab extends StatelessWidget {
                           child: HomeItem(
                             img: "assets/icons/dashboard.png",
                             size: size,
-                            titel: "Dasboard",
+                            titel: "Dashboard",
                           ),
                         ),
                       )
@@ -372,6 +373,33 @@ class DashTab extends StatelessWidget {
                     ),
                   ),
                 )
+              ],
+            ),
+          ),
+          GestureDetector(
+            onTap: (() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const HelpScreen();
+                  },
+                ),
+              );
+            }),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.help,
+                  color: Colors.black.withOpacity(0.65),
+                ),
+                Text(
+                  "Ask Help",
+                  style: TextStyle(
+                      color: Colors.black.withOpacity(0.65),
+                      fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),
@@ -455,7 +483,7 @@ class HomeItem extends StatelessWidget {
                       BorderRadius.all(Radius.circular(size.width * 0.05)),
                   child: Image.asset(
                     img,
-                    width: size.width * 0.1,
+                    width: size.width * 0.08,
                   ),
                 ),
               ),
@@ -466,7 +494,7 @@ class HomeItem extends StatelessWidget {
                   titel,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: size.width * 0.04,
+                      fontSize: size.width * 0.037,
                       color: Colors.black.withOpacity(0.9),
                       fontWeight: FontWeight.w500),
                 ),

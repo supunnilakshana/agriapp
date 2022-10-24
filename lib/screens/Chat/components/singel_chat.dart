@@ -145,7 +145,14 @@ class _SingelChatScreenState extends State<SingelChatScreen>
                   right: size.width * 0.03,
                 ),
                 child: GestureDetector(
-                    onTap: () async {},
+                    onTap: () async {
+                      PopupDialog.showPopupDilog(
+                          context,
+                          "Send video calling request",
+                          "Send video calling request to ${widget.name}", () {
+                        Customtost.commontost("Sended", Colors.greenAccent);
+                      });
+                    },
                     child: Icon(
                       Icons.videocam,
                       size: size.width * 0.07,
@@ -158,11 +165,17 @@ class _SingelChatScreenState extends State<SingelChatScreen>
                 ),
                 child: GestureDetector(
                     onTap: () async {
-                      if (_scrollController.hasClients) {
-                        print("has------------------");
-                        _scrollController
-                            .jumpTo(_scrollController.position.maxScrollExtent);
-                      }
+                      PopupDialog.showPopupDilog(
+                          context,
+                          "Send calling request",
+                          "Send calling request to ${widget.name}", () {
+                        Customtost.commontost("Sended", Colors.greenAccent);
+                      });
+                      // if (_scrollController.hasClients) {
+                      //   print("has------------------");
+                      //   _scrollController
+                      //       .jumpTo(_scrollController.position.maxScrollExtent);
+                      // }
                     },
                     child: Icon(
                       Icons.call,

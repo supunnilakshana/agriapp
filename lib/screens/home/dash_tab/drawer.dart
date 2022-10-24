@@ -6,6 +6,11 @@ import 'package:agriapp/models/usermodel.dart';
 import 'package:agriapp/screens/auth/reset_password/reset_password.dart';
 import 'package:agriapp/screens/auth/sign_in.dart';
 import 'package:agriapp/screens/home/dash_tab/profile_page.dart';
+import 'package:agriapp/screens/home/drawer_item/aboutus_screen.dart';
+import 'package:agriapp/screens/home/drawer_item/appointmentList.dart';
+import 'package:agriapp/screens/home/drawer_item/contact_us.dart';
+import 'package:agriapp/screens/home/drawer_item/helpscreen.dart';
+import 'package:agriapp/screens/home/drawer_item/privacy_screen.dart';
 import 'package:agriapp/screens/language/select_lang.dart';
 import 'package:agriapp/services/auth/signin_mannager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,7 +30,7 @@ class MenuDrawer extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Drawer(
       child: Container(
-        color: Colors.green.withOpacity(0.2),
+        color: Colors.white,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -40,6 +45,7 @@ class MenuDrawer extends StatelessWidget {
                 )),
 
             Card(
+              elevation: 0,
               child: ListTile(
                 leading: const Icon(
                   Icons.person_outlined,
@@ -54,7 +60,28 @@ class MenuDrawer extends StatelessWidget {
                 },
               ),
             ),
+            int.parse(userModel.role) == UserRole.expert.index ||
+                    int.parse(userModel.role) == UserRole.fofficer.index
+                ? Card(
+                    elevation: 0,
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.list_rounded,
+                        color: kPrimaryColordark,
+                      ),
+                      title: const Text('My Appoinments'),
+                      onTap: () async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const AppointmentsScreen()));
+                      },
+                    ),
+                  )
+                : Container(),
             Card(
+              elevation: 0,
               child: ListTile(
                 leading: const Icon(
                   Icons.password_outlined,
@@ -70,39 +97,7 @@ class MenuDrawer extends StatelessWidget {
               ),
             ),
             Card(
-              child: ListTile(
-                leading: const Icon(
-                  Icons.web,
-                  color: kPrimaryColordark,
-                ),
-                title: const Text('About Us'),
-                onTap: () {
-                  Customtost.commontost(
-                      "We are Atext Developers", Colors.amber);
-                },
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(
-                  Icons.contact_page_outlined,
-                  color: kPrimaryColordark,
-                ),
-                title: const Text('Contact Us'),
-                onTap: () async {},
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(
-                  Icons.book_online_outlined,
-                  color: kPrimaryColordark,
-                ),
-                title: const Text('Terms & Conditions'),
-                onTap: () async {},
-              ),
-            ),
-            Card(
+              elevation: 0,
               child: ListTile(
                   leading: const Icon(
                     Icons.language_rounded,
@@ -117,6 +112,72 @@ class MenuDrawer extends StatelessWidget {
                   }),
             ),
             Card(
+              elevation: 0,
+              child: ListTile(
+                leading: const Icon(
+                  Icons.help_outline_rounded,
+                  color: kPrimaryColordark,
+                ),
+                title: const Text('Help'),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HelpScreen()));
+                },
+              ),
+            ),
+            Card(
+              elevation: 0,
+              child: ListTile(
+                leading: const Icon(
+                  Icons.web,
+                  color: kPrimaryColordark,
+                ),
+                title: const Text('About Us'),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AboutUsScreen()));
+                },
+              ),
+            ),
+            Card(
+              elevation: 0,
+              child: ListTile(
+                leading: const Icon(
+                  Icons.contact_page_outlined,
+                  color: kPrimaryColordark,
+                ),
+                title: const Text('Contact Us'),
+                onTap: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ContactUsScreen()));
+                },
+              ),
+            ),
+            Card(
+              elevation: 0,
+              child: ListTile(
+                leading: const Icon(
+                  Icons.book_online_outlined,
+                  color: kPrimaryColordark,
+                ),
+                title: const Text('Privacy & Policy'),
+                onTap: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PrivacyScreen()));
+                },
+              ),
+            ),
+
+            Card(
+              elevation: 0,
               child: ListTile(
                 leading: const Icon(
                   Icons.logout_rounded,

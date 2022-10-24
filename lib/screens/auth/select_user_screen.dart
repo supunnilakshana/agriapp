@@ -8,100 +8,90 @@ class SelectUserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        Image.asset(
-          "assets/images/sbackjpg.jpg",
-          height: double.infinity,
-          width: size.width,
-          fit: BoxFit.cover,
-        ),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            centerTitle: true,
-            title: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Who are you ?  ",
-                style: TextStyle(
-                    fontSize: size.width * 0.06, color: Colors.black87),
-              ),
-            ),
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            iconTheme: IconThemeData(color: Colors.black),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            "Who are you ?  ",
+            style:
+                TextStyle(fontSize: size.width * 0.06, color: Colors.black87),
           ),
-          body: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: size.height * 0.1,
-                  ),
-                  GestureDetector(
-                    child: SelectpetItem(
-                      img: "assets/icons/farmer.png",
-                      titel: "Farmer",
-                      size: size,
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: size.height * 0.1,
+              ),
+              GestureDetector(
+                child: SelectpetItem(
+                  img: "assets/icons/farmer.png",
+                  titel: "Farmer",
+                  size: size,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const SignUpFamer();
+                      },
                     ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const SignUpFamer();
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: size.height * 0.05,
-                  ),
-                  GestureDetector(
-                    child: SelectpetItem(
-                      img: "assets/icons/officer.png",
-                      titel: "Feild Officer",
-                      size: size,
+                  );
+                },
+              ),
+              SizedBox(
+                height: size.height * 0.05,
+              ),
+              GestureDetector(
+                child: SelectpetItem(
+                  img: "assets/icons/officer.png",
+                  titel: "Feild Officer",
+                  size: size,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SignUpFOfficer();
+                      },
                     ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return SignUpFOfficer();
-                          },
-                        ),
-                      );
-                    },
+                  );
+                },
+              ),
+              SizedBox(
+                height: size.height * 0.05,
+              ),
+              GestureDetector(
+                  child: SelectpetItem(
+                    img: "assets/icons/expert.png",
+                    titel: "Expert",
+                    size: size,
                   ),
-                  SizedBox(
-                    height: size.height * 0.05,
-                  ),
-                  GestureDetector(
-                      child: SelectpetItem(
-                        img: "assets/icons/expert.png",
-                        titel: "Expert",
-                        size: size,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return SignUpExpert();
+                        },
                       ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return SignUpExpert();
-                            },
-                          ),
-                        );
-                      })
-                ],
-              ),
-            ),
+                    );
+                  })
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }
@@ -170,7 +160,7 @@ class SelectpetItem extends StatelessWidget {
                 titel,
                 style: TextStyle(
                     fontSize: size.width * 0.06,
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.black.withOpacity(0.8),
                     fontWeight: FontWeight.w500),
               ),
             ),

@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:agriapp/components/popup_dilog.dart';
 import 'package:agriapp/components/roundedtextFiled.dart';
 import 'package:agriapp/components/tots.dart';
 import 'package:agriapp/constants/constraints.dart';
@@ -100,6 +103,7 @@ class _FriendlistState extends State<Friendlist> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                         child: ListView.builder(
+                            physics: ClampingScrollPhysics(),
                             itemCount: data.length,
                             shrinkWrap: true,
                             itemBuilder: (context, indext) {
@@ -115,17 +119,37 @@ class _FriendlistState extends State<Friendlist> {
                                     contentPadding: EdgeInsets.symmetric(
                                         horizontal: 5.0, vertical: 10.0),
                                     leading: Container(
-                                        child: Container(
-                                      child: CircleAvatar(
-                                        backgroundColor: kPrimaryColorlight,
-                                        radius: size.width * 0.1,
-                                        backgroundImage: NetworkImage(
-                                          data[indext].imageurl != ""
-                                              ? data[indext].imageurl
-                                              : guserimg,
-                                        ),
-                                      ),
-                                    )),
+                                        width: size.width * 0.15,
+                                        child: Stack(
+                                          clipBehavior: Clip.none,
+                                          fit: StackFit.expand,
+                                          children: [
+                                            CircleAvatar(
+                                              backgroundColor:
+                                                  kPrimaryColorlight,
+                                              radius: size.width * 0.1,
+                                              backgroundImage: NetworkImage(
+                                                data[indext].imageurl != ""
+                                                    ? data[indext].imageurl
+                                                    : guserimg,
+                                              ),
+                                            ),
+                                            Positioned(
+                                                bottom: 0,
+                                                right: 0,
+                                                child: indext % 2 == 0 &&
+                                                        int.parse(data[indext]
+                                                                .role) ==
+                                                            UserRole
+                                                                .expert.index
+                                                    ? Image.asset(
+                                                        "assets/icons/batch1.png",
+                                                        width:
+                                                            size.width * 0.055,
+                                                      )
+                                                    : Container())
+                                          ],
+                                        )),
                                     title: Text(
                                       data[indext].name,
                                       overflow: TextOverflow.ellipsis,
@@ -151,7 +175,16 @@ class _FriendlistState extends State<Friendlist> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         IconButton(
-                                          onPressed: () async {},
+                                          onPressed: () async {
+                                            PopupDialog.showPopupDilog(
+                                                context,
+                                                "Send calling request",
+                                                "Send calling request to ${data[indext].name}",
+                                                () {
+                                              Customtost.commontost(
+                                                  "Sended", Colors.greenAccent);
+                                            });
+                                          },
                                           icon: Icon(
                                             Icons.call,
                                             color:
@@ -161,7 +194,16 @@ class _FriendlistState extends State<Friendlist> {
                                           iconSize: size.width * 0.07,
                                         ),
                                         IconButton(
-                                          onPressed: () async {},
+                                          onPressed: () async {
+                                            PopupDialog.showPopupDilog(
+                                                context,
+                                                "Send video calling request",
+                                                "Send video calling request to ${data[indext].name}",
+                                                () {
+                                              Customtost.commontost(
+                                                  "Sended", Colors.greenAccent);
+                                            });
+                                          },
                                           icon: Icon(
                                             Icons.video_call_rounded,
                                             color:

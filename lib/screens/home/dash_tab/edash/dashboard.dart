@@ -31,7 +31,7 @@ class Edashbord extends StatelessWidget {
         elevation: 0,
         leading: BackButton(),
         title: Text(
-          'Dasboard',
+          'Dashboard',
           style: TextStyle(
               color: Colors.white,
               fontSize: size.width * 0.06,
@@ -42,26 +42,6 @@ class Edashbord extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ClipPath(
-            clipper: WaveClipperOne(),
-            child: Container(
-              height: size.height * 0.05,
-              color: kPrimaryColordark,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: size.width * 0.06,
-                        top: size.height * 0.01,
-                        bottom: size.height * 0.01),
-                    child: Row(
-                      children: [],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
           const Padding(
               padding: EdgeInsets.all(8.0), child: DashboardLineChart()),
           userModel.role != "1"
@@ -158,7 +138,7 @@ class Edashbord extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomeScreen(
+                              builder: (context) => const HomeScreen(
                                     index: 2,
                                   )));
                     },

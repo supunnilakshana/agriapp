@@ -56,12 +56,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           key: _formKey,
           child: Container(
             width: double.infinity,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-              Color.fromARGB(255, 8, 235, 65),
-              Color.fromARGB(255, 18, 157, 59),
-              Color.fromARGB(255, 7, 175, 102)
-            ])),
+            decoration: const BoxDecoration(gradient: kGradientGreen),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

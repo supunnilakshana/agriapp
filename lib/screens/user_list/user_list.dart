@@ -33,7 +33,7 @@ class _UserListScreenState extends State<UserListScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        color: Colors.green.withOpacity(0.2),
+        color: Colors.white,
         child: ListView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             children: [
