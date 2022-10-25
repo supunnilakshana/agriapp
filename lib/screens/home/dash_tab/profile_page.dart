@@ -284,6 +284,33 @@ class _ProfilePageState extends State<ProfilePage> {
                                         )
                                       : Container(),
                                   int.parse(userModel.role) ==
+                                          UserRole.farmer.index
+                                      ? Container(
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                              border: Border(
+                                                  bottom: BorderSide(
+                                                      color: Colors
+                                                          .grey.shade200))),
+                                          child: TextFormField(
+                                            enabled: false,
+                                            controller: _citycon,
+                                            onChanged: (value) {
+                                              _city = value;
+                                            },
+                                            validator: (value) {
+                                              return Validater.genaralvalid(
+                                                  value!);
+                                            },
+                                            decoration: const InputDecoration(
+                                                labelText: "City",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                                border: InputBorder.none),
+                                          ),
+                                        )
+                                      : Container(),
+                                  int.parse(userModel.role) ==
                                           UserRole.fofficer.index
                                       ? Container(
                                           padding: const EdgeInsets.all(10),
@@ -337,29 +364,35 @@ class _ProfilePageState extends State<ProfilePage> {
                                           ),
                                         )
                                       : Container(),
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey.shade200))),
-                                    child: TextFormField(
-                                      enabled: false,
-                                      maxLines: 2,
-                                      controller: _addrcon,
-                                      onChanged: (value) {
-                                        _addr = value;
-                                      },
-                                      validator: (value) {
-                                        return Validater.genaralvalid(value!);
-                                      },
-                                      decoration: const InputDecoration(
-                                          labelText: "Employment place address",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
+                                  int.parse(userModel.role) !=
+                                          UserRole.farmer.index
+                                      ? Container(
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                              border: Border(
+                                                  bottom: BorderSide(
+                                                      color: Colors
+                                                          .grey.shade200))),
+                                          child: TextFormField(
+                                            enabled: false,
+                                            maxLines: 2,
+                                            controller: _addrcon,
+                                            onChanged: (value) {
+                                              _addr = value;
+                                            },
+                                            validator: (value) {
+                                              return Validater.genaralvalid(
+                                                  value!);
+                                            },
+                                            decoration: const InputDecoration(
+                                                labelText:
+                                                    "Employment place address",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                                border: InputBorder.none),
+                                          ),
+                                        )
+                                      : Container(),
                                 ],
                               ),
                             ),

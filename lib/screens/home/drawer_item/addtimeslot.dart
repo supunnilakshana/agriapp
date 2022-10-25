@@ -212,14 +212,7 @@ class _AddFreeTimeSlotsState extends State<AddFreeTimeSlots> {
                             GestureDetector(
                               onTap: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return const SignIn();
-                                      },
-                                    ),
-                                  );
+                                  Navigator.pop(context);
                                 }
                               },
                               child: Container(

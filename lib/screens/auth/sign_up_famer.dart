@@ -251,6 +251,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                       },
                                       obscureText: true,
                                       decoration: const InputDecoration(
+                                          suffixIcon: Icon(Icons.visibility),
                                           hintText: "Password",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),

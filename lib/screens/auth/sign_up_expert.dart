@@ -293,6 +293,7 @@ class _SignUpExpertState extends State<SignUpExpert> {
                                         return Validater.signupPassword(value!);
                                       },
                                       decoration: const InputDecoration(
+                                          suffixIcon: Icon(Icons.visibility),
                                           hintText: "Password",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),

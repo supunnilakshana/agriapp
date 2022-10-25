@@ -186,18 +186,10 @@ class _ChatListState extends State<ChatList> {
                                                 children: [
                                                   IconButton(
                                                     onPressed: () async {
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) {
-                                                            return ScheduleAp(
-                                                              userModel:
-                                                                  userModel,
-                                                              val: "1",
-                                                            );
-                                                          },
-                                                        ),
-                                                      );
+                                                      PopupDialog
+                                                          .choosecallDilog(
+                                                              context,
+                                                              userModel);
                                                     },
                                                     icon: Icon(
                                                       Icons.call,
@@ -217,33 +209,14 @@ class _ChatListState extends State<ChatList> {
                                                             return ScheduleAp(
                                                               userModel:
                                                                   userModel,
-                                                              val: "2",
+                                                              val: "1",
                                                             );
                                                           },
                                                         ),
                                                       );
-
-                                                      // if (int.parse(userModel
-                                                      //             .role) ==
-                                                      //         UserRole.expert
-                                                      //             .index ||
-                                                      //     int.parse(userModel
-                                                      //             .role) ==
-                                                      //         UserRole.fofficer
-                                                      //             .index) {
-                                                      //   PopupDialog.showPopupDilog(
-                                                      //       context,
-                                                      //       "Send video calling request",
-                                                      //       "Send video calling request to ${userModel.name}",
-                                                      //       () {
-                                                      //     Customtost.commontost(
-                                                      //         "Sended",
-                                                      //         Colors.green);
-                                                      //   });
-                                                      //}
                                                     },
                                                     icon: Icon(
-                                                      Icons.video_call_rounded,
+                                                      Icons.date_range_outlined,
                                                       color: kBasefontColor
                                                           .withOpacity(0.6),
                                                     ),

@@ -127,6 +127,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                       },
                                       decoration: const InputDecoration(
                                           hintText: "Old Password",
+                                          suffixIcon: Icon(Icons.visibility),
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -149,6 +150,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                       },
                                       decoration: const InputDecoration(
                                           hintText: "New Password",
+                                          suffixIcon: Icon(Icons.visibility),
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -171,6 +173,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                       },
                                       decoration: const InputDecoration(
                                           hintText: "Confirm Password",
+                                          suffixIcon: Icon(Icons.visibility),
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),

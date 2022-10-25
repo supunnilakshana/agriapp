@@ -7,6 +7,7 @@ import 'package:agriapp/screens/auth/load_userdata.dart';
 import 'package:agriapp/screens/auth/check_signIn.dart';
 import 'package:agriapp/screens/auth/select_user_screen.dart';
 import 'package:agriapp/screens/auth/sign_up_famer.dart';
+import 'package:agriapp/screens/language/select_lang.dart';
 import 'package:agriapp/services/auth/signin_mannager.dart';
 import 'package:agriapp/services/validator/validate_handeler.dart';
 
@@ -42,9 +43,44 @@ class _SignInState extends State<SignIn> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: size.height * 0.05),
+                SizedBox(
+                  height: size.height * 0.05,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const SelectLang();
+                            },
+                          ),
+                        );
+                      },
+                      child: Row(
+                        children: const [
+                          Icon(
+                            Icons.language_outlined,
+                            size: 26,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            "Change Language",
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                  ],
+                ),
                 Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -114,7 +150,7 @@ class _SignInState extends State<SignIn> {
                                         return Validater.vaildemail(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Email",
+                                          hintText: "Email or Mobile No",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -136,6 +172,7 @@ class _SignInState extends State<SignIn> {
                                         return Validater.signupPassword(value!);
                                       },
                                       decoration: const InputDecoration(
+                                          suffixIcon: Icon(Icons.visibility),
                                           hintText: "Password",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),

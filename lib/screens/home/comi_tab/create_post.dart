@@ -99,15 +99,38 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             const SizedBox(
                               height: 25,
                             ),
-                            SizedBox(
-                              width: size.width * 0.2,
-                              child: GestureDetector(
-                                child: Image.asset("assets/icons/addphoto.png"),
-                                onTap: () async {
-                                  FocusScope.of(context).unfocus();
-                                  _imgFromGallery();
-                                },
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SizedBox(
+                                    width: size.width * 0.16,
+                                    child: GestureDetector(
+                                      child: Image.asset(
+                                          "assets/icons/addphoto.png"),
+                                      onTap: () async {
+                                        FocusScope.of(context).unfocus();
+                                        _imgFromGallery();
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SizedBox(
+                                    width: size.width * 0.16,
+                                    child: GestureDetector(
+                                      child: Image.asset(
+                                          "assets/icons/addvideo.png"),
+                                      onTap: () async {
+                                        FocusScope.of(context).unfocus();
+                                        // _imgFromGallery();
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             isimgload
                                 ? SizedBox(
@@ -145,7 +168,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "titel",
+                                          hintText: "title",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -167,7 +190,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "descriptioness",
+                                          hintText: "description",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),

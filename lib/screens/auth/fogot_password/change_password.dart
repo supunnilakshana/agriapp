@@ -116,6 +116,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                       },
                                       decoration: const InputDecoration(
                                           hintText: "New Password",
+                                          suffixIcon: Icon(Icons.visibility),
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),

@@ -60,26 +60,26 @@ class MenuDrawer extends StatelessWidget {
                 },
               ),
             ),
-            int.parse(userModel.role) == UserRole.expert.index ||
-                    int.parse(userModel.role) == UserRole.fofficer.index
-                ? Card(
-                    elevation: 0,
-                    child: ListTile(
-                      leading: const Icon(
-                        Icons.list_rounded,
-                        color: kPrimaryColordark,
-                      ),
-                      title: const Text('My Appoinments'),
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const AppointmentsScreen()));
-                      },
-                    ),
-                  )
-                : Container(),
+            // int.parse(userModel.role) == UserRole.expert.index ||
+            //         int.parse(userModel.role) == UserRole.fofficer.index
+            //     ?
+            Card(
+              elevation: 0,
+              child: ListTile(
+                leading: const Icon(
+                  Icons.list_rounded,
+                  color: kPrimaryColordark,
+                ),
+                title: const Text('My Appoinments'),
+                onTap: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AppointmentsScreen()));
+                },
+              ),
+            ),
+            // : Container(),
             Card(
               elevation: 0,
               child: ListTile(

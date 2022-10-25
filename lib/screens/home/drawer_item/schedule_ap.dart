@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:agriapp/components/already_have_an_account_acheck.dart';
 import 'package:agriapp/components/or_divider.dart';
+import 'package:agriapp/components/tots.dart';
 import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/usermodel.dart';
@@ -29,7 +30,7 @@ import 'package:date_format/date_format.dart';
 import '../../auth/fogot_password/change_password.dart';
 
 class ScheduleAp extends StatefulWidget {
-  const ScheduleAp({Key? key, required this.userModel, required this.val})
+  const ScheduleAp({Key? key, required this.userModel, this.val = "1"})
       : super(key: key);
   final UserModel userModel;
   final String val;
@@ -165,7 +166,7 @@ class _ScheduleApState extends State<ScheduleAp> {
                                         child: RadioListTile(
                                             value: "1",
                                             title: const Text(
-                                              "Voice call",
+                                              "Meting via voice ",
                                             ),
                                             groupValue: _value,
                                             onChanged: (value) {
@@ -177,7 +178,7 @@ class _ScheduleApState extends State<ScheduleAp> {
                                       Expanded(
                                         child: RadioListTile(
                                             title: const Text(
-                                              "Video call",
+                                              "Meting via video",
                                             ),
                                             value: "2",
                                             groupValue: _value,
@@ -366,7 +367,11 @@ class _ScheduleApState extends State<ScheduleAp> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                if (_formKey.currentState!.validate()) {}
+                                if (_formKey.currentState!.validate()) {
+                                  Customtost.commontost(
+                                      "Scheduled Successfully",
+                                      kPrimaryColordark);
+                                }
                               },
                               child: Container(
                                 height: 50,

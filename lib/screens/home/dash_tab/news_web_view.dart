@@ -88,8 +88,7 @@ class _NewsWebViewState extends State<NewsWebView> {
           width: size.width,
           height: size.height,
           child: WebView(
-            initialUrl:
-                "https://foodtank.com/news/category/sustainable-agriculture/?gclid=CjwKCAjwtKmaBhBMEiwAyINuwCSs6L3-Su9m2cNy1fJpnk7FWB0_NYRAwHXaoL3q0acRuTjJ6BxtSBoCm6cQAvD_BwE",
+            initialUrl: "https://araliyarice.com/paddy-cultivation/",
             javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: (WebViewController webViewController) {
               controller = webViewController;

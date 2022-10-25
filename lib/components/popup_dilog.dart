@@ -1,7 +1,10 @@
 import 'package:agriapp/constants/constraints.dart';
+import 'package:agriapp/models/usermodel.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
 import 'package:flutter/material.dart';
+
+import '../screens/calling_ui/dialScreen/dial_screen.dart';
 
 class PopupDialog {
   static showPopupDilog(BuildContext context, String titel, String description,
@@ -21,6 +24,46 @@ class PopupDialog {
             btnOkColor: kPrimaryColordark,
             btnCancelColor: Colors.grey)
         .show();
+  }
+
+  static choosecallDilog(BuildContext context, UserModel userModel) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.QUESTION,
+      animType: AnimType.BOTTOMSLIDE,
+      title: "Choose call type",
+      desc: "Do you want to get which type call ? ",
+      btnCancelText: "Voice",
+      btnOkText: "Video",
+      btnCancelOnPress: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return DialScreen(
+                iurl: userModel.imageurl,
+                name: userModel.name,
+              );
+            },
+          ),
+        );
+      },
+      btnOkOnPress: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return DialScreen(
+                iurl: userModel.imageurl,
+                name: userModel.name,
+              );
+            },
+          ),
+        );
+      },
+      btnOkColor: Colors.green,
+      btnCancelColor: kPrimaryColordark,
+    ).show();
   }
 
   static showPopupWarning(BuildContext context, String titel,

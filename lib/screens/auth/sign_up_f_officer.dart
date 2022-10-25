@@ -301,6 +301,7 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                       },
                                       decoration: const InputDecoration(
                                           hintText: "Password",
+                                          suffixIcon: Icon(Icons.visibility),
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),

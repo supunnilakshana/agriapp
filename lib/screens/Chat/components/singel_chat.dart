@@ -26,6 +26,8 @@ import 'package:simple_animations/simple_animations.dart';
 import '../../../components/popup_dilog.dart';
 import 'package:path/path.dart' as p;
 
+import '../../calling_ui/dialScreen/dial_screen.dart';
+
 class SingelChatScreen extends StatefulWidget {
   final bool isnew;
   final String email;
@@ -146,12 +148,17 @@ class _SingelChatScreenState extends State<SingelChatScreen>
                 ),
                 child: GestureDetector(
                     onTap: () async {
-                      PopupDialog.showPopupDilog(
-                          context,
-                          "Send video calling request",
-                          "Send video calling request to ${widget.name}", () {
-                        Customtost.commontost("Sended", Colors.greenAccent);
-                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return DialScreen(
+                              iurl: widget.userModel.imageurl,
+                              name: widget.userModel.name,
+                            );
+                          },
+                        ),
+                      );
                     },
                     child: Icon(
                       Icons.videocam,
@@ -165,17 +172,17 @@ class _SingelChatScreenState extends State<SingelChatScreen>
                 ),
                 child: GestureDetector(
                     onTap: () async {
-                      PopupDialog.showPopupDilog(
-                          context,
-                          "Send calling request",
-                          "Send calling request to ${widget.name}", () {
-                        Customtost.commontost("Sended", Colors.greenAccent);
-                      });
-                      // if (_scrollController.hasClients) {
-                      //   print("has------------------");
-                      //   _scrollController
-                      //       .jumpTo(_scrollController.position.maxScrollExtent);
-                      // }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return DialScreen(
+                              iurl: widget.userModel.imageurl,
+                              name: widget.userModel.name,
+                            );
+                          },
+                        ),
+                      );
                     },
                     child: Icon(
                       Icons.call,

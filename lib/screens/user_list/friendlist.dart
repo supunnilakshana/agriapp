@@ -177,17 +177,8 @@ class _FriendlistState extends State<Friendlist> {
                                       children: [
                                         IconButton(
                                           onPressed: () async {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) {
-                                                  return ScheduleAp(
-                                                    userModel: data[indext],
-                                                    val: "1",
-                                                  );
-                                                },
-                                              ),
-                                            );
+                                            PopupDialog.choosecallDilog(
+                                                context, data[indext]);
                                           },
                                           icon: Icon(
                                             Icons.call,
@@ -205,14 +196,14 @@ class _FriendlistState extends State<Friendlist> {
                                                 builder: (context) {
                                                   return ScheduleAp(
                                                     userModel: data[indext],
-                                                    val: "2",
+                                                    val: "1",
                                                   );
                                                 },
                                               ),
                                             );
                                           },
                                           icon: Icon(
-                                            Icons.video_call_rounded,
+                                            Icons.date_range_outlined,
                                             color:
                                                 kBasefontColor.withOpacity(0.6),
                                           ),

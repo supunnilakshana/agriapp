@@ -1,3 +1,4 @@
+import 'package:agriapp/components/tots.dart';
 import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/usermodel.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class Edashbord extends StatelessWidget {
@@ -25,7 +27,7 @@ class Edashbord extends StatelessWidget {
     var userModel = Provider.of<UserModel>(context);
     return Scaffold(
       key: _scaffoldKey,
-      // backgroundColor: Colors.green.withOpacity(0.2),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: kPrimaryColordark,
         elevation: 0,
@@ -40,11 +42,19 @@ class Edashbord extends StatelessWidget {
       ),
       body: SingleChildScrollView(
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const Padding(
               padding: EdgeInsets.all(8.0), child: DashboardLineChart()),
-          userModel.role != "1"
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 8, right: 8),
+          //   child: SvgPicture.asset("assets/images/dashbarchart.svg"),
+          // ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Image.asset("assets/images/barchart.png"),
+          ),
+          int.parse(userModel.role) != UserRole.fofficer.index
               ? Padding(
                   padding: const EdgeInsets.only(
                       left: 10, right: 10, bottom: 3, top: 3),
@@ -70,7 +80,67 @@ class Edashbord extends StatelessWidget {
                           height: 8,
                         ),
                         title: Text(
-                          "6k Connections with farmers",
+                          "6k Connections with officers",
+                          style: TextStyle(
+                              fontSize: size.width * 0.05,
+                              color: Colors.black.withOpacity(0.7),
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : Container(),
+          int.parse(userModel.role) != UserRole.farmer.index
+              ? Padding(
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, bottom: 3, top: 3),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 2,
+                      color: const Color.fromARGB(255, 184, 226, 201),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(size.width * 0.05)),
+                      ),
+                      child: ListTile(
+                        leading: Image.asset("assets/icons/farmer.png"),
+                        subtitle: const SizedBox(
+                          height: 8,
+                        ),
+                        title: Text(
+                          "4k Connections with farmers",
+                          style: TextStyle(
+                              fontSize: size.width * 0.05,
+                              color: Colors.black.withOpacity(0.7),
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : Container(),
+          int.parse(userModel.role) != UserRole.expert.index
+              ? Padding(
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, bottom: 3, top: 3),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 2,
+                      color: const Color.fromARGB(255, 184, 226, 201),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(size.width * 0.05)),
+                      ),
+                      child: ListTile(
+                        leading: Image.asset("assets/icons/expert.png"),
+                        subtitle: const SizedBox(
+                          height: 8,
+                        ),
+                        title: Text(
+                          "2k Connections with Experts",
                           style: TextStyle(
                               fontSize: size.width * 0.05,
                               color: Colors.black.withOpacity(0.7),
@@ -82,56 +152,9 @@ class Edashbord extends StatelessWidget {
                 )
               : Container(),
           Padding(
-            padding:
-                const EdgeInsets.only(left: 10, right: 10, bottom: 3, top: 3),
-            child: GestureDetector(
-              onTap: () {},
-              child: Card(
-                elevation: 2,
-                color: const Color.fromARGB(255, 184, 226, 201),
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(size.width * 0.05)),
-                ),
-                child: ListTile(
-                  leading: Image.asset("assets/icons/farmer.png"),
-                  subtitle: const SizedBox(
-                    height: 8,
-                  ),
-                  title: Text(
-                    "4k Connections with farmers",
-                    style: TextStyle(
-                        fontSize: size.width * 0.05,
-                        color: Colors.black.withOpacity(0.7),
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                int.parse(userModel.role) == UserRole.expert.index
-                    ? Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeScreen(
-                                          index: 1,
-                                        )));
-                          },
-                          child: HomeItem(
-                            img: "assets/icons/inbox.png",
-                            size: size,
-                            titel: "Inbox",
-                          ),
-                        ),
-                      )
-                    : Container(),
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
@@ -139,46 +162,61 @@ class Edashbord extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const HomeScreen(
-                                    index: 2,
+                                    index: 1,
                                   )));
                     },
                     child: HomeItem(
-                      img: "assets/icons/community.png",
+                      img: "assets/icons/inbox.png",
                       size: size,
-                      titel: "Community",
+                      titel: "Inbox",
                     ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => VideoScreen()));
-                    },
-                    child: HomeItem(
-                      img: "assets/icons/videos.png",
-                      size: size,
-                      titel: "Videos",
-                    ),
-                  ),
+                  child: int.parse(userModel.role) != UserRole.farmer.index
+                      ? GestureDetector(
+                          onTap: () {
+                            Customtost.commontost("Comming soon",
+                                const Color.fromARGB(255, 29, 89, 31));
+                          },
+                          child: HomeItem(
+                            img: "assets/icons/videomeeting.png",
+                            size: size,
+                            titel: "Video Meeting",
+                          ),
+                        )
+                      : Container(),
                 ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => NewsWebView()));
-                    },
-                    child: HomeItem(
-                      size: size,
-                      img: "assets/icons/news.png",
-                      titel: "News",
-                    ),
-                  ),
-                )
+                // Expanded(
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //               builder: (context) => VideoScreen()));
+                //     },
+                //     child: HomeItem(
+                //       img: "assets/icons/videos.png",
+                //       size: size,
+                //       titel: "Videos",
+                //     ),
+                //   ),
+                // ),
+                // Expanded(
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //               builder: (context) => NewsWebView()));
+                //     },
+                //     child: HomeItem(
+                //       size: size,
+                //       img: "assets/icons/news.png",
+                //       titel: "News",
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ),

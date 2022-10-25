@@ -30,24 +30,28 @@ class DashTab extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
           actions: [
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ProfilePage()));
-              },
-              child: Container(
-                  margin: const EdgeInsets.only(top: 2, right: 5),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: size.width * 0.08,
-                    backgroundImage: NetworkImage(userModel.imageurl == ""
-                        ? guserimg
-                        : userModel.imageurl),
-                  )),
-            ),
+            IconButton(
+                onPressed: (() {}),
+                icon: Icon(
+                  Icons.notifications,
+                  color: Colors.white.withOpacity(.9),
+                  size: size.width * 0.08,
+                ))
           ],
+          title: GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ProfilePage()));
+            },
+            child: Container(
+                margin: const EdgeInsets.only(top: 2, right: 5, bottom: 2),
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: size.width * 0.06,
+                  backgroundImage: NetworkImage(
+                      userModel.imageurl == "" ? guserimg : userModel.imageurl),
+                )),
+          ),
           iconTheme: const IconThemeData(
             color: Colors.black,
           ),
@@ -309,23 +313,19 @@ class DashTab extends StatelessWidget {
             padding: const EdgeInsets.all(5.0),
             child: Row(
               children: [
-                int.parse(userModel.role) == UserRole.expert.index
-                    ? Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Edashbord()));
-                          },
-                          child: HomeItem(
-                            img: "assets/icons/dashboard.png",
-                            size: size,
-                            titel: "Dashboard",
-                          ),
-                        ),
-                      )
-                    : Container(),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Edashbord()));
+                    },
+                    child: HomeItem(
+                      img: "assets/icons/dashboard.png",
+                      size: size,
+                      titel: "Dashboard",
+                    ),
+                  ),
+                ),
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
