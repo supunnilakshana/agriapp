@@ -100,13 +100,13 @@ class _LineChart extends StatelessWidget {
     String text;
     switch (value.toInt()) {
       case 1:
-        text = '1000';
+        text = '10';
         break;
       case 3:
-        text = '3000';
+        text = '30';
         break;
       case 5:
-        text = '5000';
+        text = '60';
         break;
       default:
         return Container();
@@ -289,23 +289,23 @@ class DashboardLineChartState extends State<DashboardLineChart> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 const SizedBox(
-                  height: 37,
+                  height: 27,
                 ),
                 const Text(
-                  'Connection 10K',
+                  'Connection 68',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 32,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
                   ),
                 ),
                 const SizedBox(
-                  height: 4,
+                  height: 5,
                 ),
                 RichText(
                   text: TextSpan(
-                    text: 'Total growt ',
+                    text: 'Total Growth ',
                     style: TextStyle(
                       color: Colors.black.withOpacity(0.7),
                       fontSize: 16,

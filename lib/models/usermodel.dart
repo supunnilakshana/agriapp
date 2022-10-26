@@ -61,6 +61,7 @@ class UserModel extends ChangeNotifier {
     phone = userModel.phone;
     role = userModel.role;
     area = userModel.area;
+    emno = userModel.emno;
     date = userModel.date;
     address = userModel.address;
     imageurl = userModel.imageurl;

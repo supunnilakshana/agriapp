@@ -1,5 +1,6 @@
 import 'package:agriapp/components/already_have_an_account_acheck.dart';
 import 'package:agriapp/components/or_divider.dart';
+import 'package:agriapp/components/tots.dart';
 import 'package:agriapp/constants/constraints.dart';
 import 'package:agriapp/constants/initdata.dart';
 import 'package:agriapp/models/usermodel.dart';
@@ -9,6 +10,7 @@ import 'package:agriapp/screens/auth/load_userdata.dart';
 import 'package:agriapp/screens/auth/select_user_screen.dart';
 import 'package:agriapp/screens/auth/sign_in.dart';
 import 'package:agriapp/screens/auth/sign_up_famer.dart';
+import 'package:agriapp/screens/home/home_screen.dart';
 
 import 'package:agriapp/services/validator/validate_handeler.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -191,11 +193,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                             GestureDetector(
                               onTap: () async {
                                 if (_formKey.currentState!.validate()) {
+                                  Customtost.commontost("Changed successfully",
+                                      kPrimaryColordark);
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) {
-                                        return const SignIn();
+                                        return const HomeScreen();
                                       },
                                     ),
                                   );

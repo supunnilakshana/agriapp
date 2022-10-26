@@ -44,8 +44,6 @@ class Edashbord extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Padding(
-              padding: EdgeInsets.all(8.0), child: DashboardLineChart()),
           // Padding(
           //   padding: const EdgeInsets.only(left: 8, right: 8),
           //   child: SvgPicture.asset("assets/images/dashbarchart.svg"),
@@ -54,6 +52,8 @@ class Edashbord extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Image.asset("assets/images/barchart.png"),
           ),
+          const Padding(
+              padding: EdgeInsets.all(10.0), child: DashboardLineChart()),
           int.parse(userModel.role) != UserRole.fofficer.index
               ? Padding(
                   padding: const EdgeInsets.only(
@@ -80,7 +80,7 @@ class Edashbord extends StatelessWidget {
                           height: 8,
                         ),
                         title: Text(
-                          "6k Connections with officers",
+                          "8 connections with officers",
                           style: TextStyle(
                               fontSize: size.width * 0.05,
                               color: Colors.black.withOpacity(0.7),
@@ -110,7 +110,7 @@ class Edashbord extends StatelessWidget {
                           height: 8,
                         ),
                         title: Text(
-                          "4k Connections with farmers",
+                          "60 connections with farmers",
                           style: TextStyle(
                               fontSize: size.width * 0.05,
                               color: Colors.black.withOpacity(0.7),
@@ -140,7 +140,7 @@ class Edashbord extends StatelessWidget {
                           height: 8,
                         ),
                         title: Text(
-                          "2k Connections with Experts",
+                          "4 connections with Experts",
                           style: TextStyle(
                               fontSize: size.width * 0.05,
                               color: Colors.black.withOpacity(0.7),

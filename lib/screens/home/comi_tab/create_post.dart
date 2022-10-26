@@ -59,10 +59,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             decoration: const BoxDecoration(gradient: kGradientGreen),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: size.height * 0.05),
+              children: [
+                SizedBox(height: size.height * 0.02),
+                const BackButton(
+                  color: Colors.white,
+                ),
                 Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.only(
+                      left: 20, right: 20, top: 2, bottom: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -122,7 +126,21 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                     width: size.width * 0.16,
                                     child: GestureDetector(
                                       child: Image.asset(
-                                          "assets/icons/addvideo.png"),
+                                          "assets/images/addvideop.png"),
+                                      onTap: () async {
+                                        FocusScope.of(context).unfocus();
+                                        // _imgFromGallery();
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SizedBox(
+                                    width: size.width * 0.16,
+                                    child: GestureDetector(
+                                      child: Image.asset(
+                                          "assets/icons/addaudio.png"),
                                       onTap: () async {
                                         FocusScope.of(context).unfocus();
                                         // _imgFromGallery();
@@ -168,7 +186,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "title",
+                                          hintText: "Title",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -190,7 +208,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "description",
+                                          hintText: "Description",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
