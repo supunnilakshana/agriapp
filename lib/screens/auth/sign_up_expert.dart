@@ -165,7 +165,7 @@ class _SignUpExpertState extends State<SignUpExpert> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Name",
+                                          hintText: "Name *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -207,7 +207,7 @@ class _SignUpExpertState extends State<SignUpExpert> {
                                         return Validater.vaildmobile(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Mobile No",
+                                          hintText: "Mobile No *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -228,7 +228,7 @@ class _SignUpExpertState extends State<SignUpExpert> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Speialized Area",
+                                          hintText: "Speialized Area *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -249,7 +249,7 @@ class _SignUpExpertState extends State<SignUpExpert> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Employement No",
+                                          hintText: "Employement No *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -271,7 +271,8 @@ class _SignUpExpertState extends State<SignUpExpert> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Employment place address",
+                                          hintText:
+                                              "Employment place address *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -294,7 +295,7 @@ class _SignUpExpertState extends State<SignUpExpert> {
                                       },
                                       decoration: const InputDecoration(
                                           suffixIcon: Icon(Icons.visibility),
-                                          hintText: "Password",
+                                          hintText: "Password * ",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),

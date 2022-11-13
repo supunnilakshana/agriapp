@@ -172,7 +172,7 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Name",
+                                          hintText: "Name *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -193,7 +193,7 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                         return Validater.vaildemail(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Email",
+                                          hintText: "Email *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -235,7 +235,7 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Employement No",
+                                          hintText: "Employement No *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -256,7 +256,7 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Rsponsible Area",
+                                          hintText: "Rsponsible Area *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -278,7 +278,8 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Employment place address",
+                                          hintText:
+                                              "Employment place address * ",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -300,7 +301,7 @@ class _SignUpFOfficerState extends State<SignUpFOfficer> {
                                         return Validater.signupPassword(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Password",
+                                          hintText: "Password * ",
                                           suffixIcon: Icon(Icons.visibility),
                                           hintStyle:
                                               TextStyle(color: Colors.grey),

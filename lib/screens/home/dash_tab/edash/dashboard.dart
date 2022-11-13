@@ -80,7 +80,7 @@ class Edashbord extends StatelessWidget {
                           height: 8,
                         ),
                         title: Text(
-                          "8 connections with officers",
+                          "6 connections with officers",
                           style: TextStyle(
                               fontSize: size.width * 0.05,
                               color: Colors.black.withOpacity(0.7),
@@ -140,7 +140,7 @@ class Edashbord extends StatelessWidget {
                           height: 8,
                         ),
                         title: Text(
-                          "4 connections with Experts",
+                          "2 connections with Experts",
                           style: TextStyle(
                               fontSize: size.width * 0.05,
                               color: Colors.black.withOpacity(0.7),

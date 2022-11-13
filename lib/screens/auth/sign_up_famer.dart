@@ -166,7 +166,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Name",
+                                          hintText: "Name *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -187,7 +187,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                         return Validater.genaralvalid(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "City",
+                                          hintText: "City *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -229,7 +229,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                         return Validater.vaildmobile(value!);
                                       },
                                       decoration: const InputDecoration(
-                                          hintText: "Mobile No",
+                                          hintText: "Mobile No *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -252,7 +252,7 @@ class _SignUpFamerState extends State<SignUpFamer> {
                                       obscureText: true,
                                       decoration: const InputDecoration(
                                           suffixIcon: Icon(Icons.visibility),
-                                          hintText: "Password",
+                                          hintText: "Password *",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
